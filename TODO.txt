@@ -1,0 +1,1 @@
+Make DELETE_POST return post id
