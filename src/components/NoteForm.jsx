@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, TextArea, Form } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
 
 import { CREATE_POST, GET_POSTS } from "../util/graphql";
 
 function NoteForm() {
-    const values = { body: "" };
+    const [text, setText] = useState("");
+
     const [createPost, { loading }] = useMutation(CREATE_POST, {
         update(cache, result) {
             const data = cache.readQuery({ query: GET_POSTS });
@@ -15,39 +16,52 @@ function NoteForm() {
                     getPosts: [result.data.createPost, ...data.getPosts]
                 }
             });
-            values.body = "";
         },
         onError(err) {
             console.log(err);
         },
-        variables: values
+        variables: { body: text }
     });
 
-    function handleClearClick() {
-        document.getElementById("addNote").value = "";
+    function onChange(event) {
+        setText(event.target.value);
     }
 
-    function onSubmit(event) {
-        values.body = event.target.addNote.value;
-        if (values.body !== "") {
-            createPost({ variables: values });
+    function onSubmit() {
+        if (text !== "") {
+            createPost();
         }
-        document.getElementById("addNote").value = "";
+        setText("");
+    }
+
+    function handleClearClick() {
+        setText("");
+    }
+
+    function toggleVisibility() {
+        //document.getElementById("note-form-buttons").classList.toggle("absent");
     }
 
     return (
         <Form onSubmit={onSubmit} loading={loading ? true : false} className="note-form">
-            <Card fluid className="create-note-card">
+            <Card fluid>
                 <Card.Content>
-                    <TextArea id="addNote" placeholder="Add a note..." />
+                    <TextArea
+                        id="new-note-body"
+                        placeholder="Add a note..."
+                        name="body"
+                        value={text}
+                        onChange={onChange}
+                        onBlur={toggleVisibility}
+                    />
                 </Card.Content>
 
-                <Card.Content extra>
+                <Card.Content extra id="note-form-buttons">
                     <div className="ui two buttons">
-                        <Button color="black" type="submit">
+                        <Button color="black" type="submit" disabled={text === ""}>
                             Post
                         </Button>
-                        <Button basic color="black" onClick={handleClearClick}>
+                        <Button basic color="black" type="button" onClick={handleClearClick}>
                             Clear
                         </Button>
                     </div>

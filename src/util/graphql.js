@@ -9,7 +9,20 @@ const GET_POSTS = gql`
             body
             createdAt
             likeCount
+            likes {
+                id
+                userId
+                username
+                createdAt
+            }
             commentCount
+            comments {
+                id
+                userId
+                username
+                body
+                createdAt
+            }
         }
     }
 `;
@@ -23,6 +36,12 @@ const CREATE_POST = gql`
             body
             createdAt
             likeCount
+            likes {
+                id
+                userId
+                username
+                createdAt
+            }
             commentCount
         }
     }
@@ -30,7 +49,50 @@ const CREATE_POST = gql`
 
 const DELETE_POST = gql`
     mutation DeletePost($postId: ID!) {
-        deletePost(postId: $postId)
+        deletePost(postId: $postId) {
+            id
+            username
+            body
+        }
+    }
+`;
+
+const LIKE_POST = gql`
+    mutation LikePost($postId: ID!) {
+        likePost(postId: $postId) {
+            id
+            likeCount
+            likes {
+                id
+                userId
+            }
+        }
+    }
+`;
+
+const CREATE_COMMENT = gql`
+    mutation CreateComment($postId: ID!, $body: String!) {
+        createComment(postId: $postId, body: $body) {
+            id
+            commentCount
+            comments {
+                id
+                userId
+            }
+        }
+    }
+`;
+
+const DELETE_COMMENT = gql`
+    mutation DeleteComment($postId: ID!, $userId: ID!, $commentId: ID!) {
+        deleteComment(postId: $postId, userId: $userId, commentId: $commentId) {
+            id
+            commentCount
+            comments {
+                id
+                userId
+            }
+        }
     }
 `;
 
@@ -58,4 +120,13 @@ const REGISTER_USER = gql`
     }
 `;
 
-export { GET_POSTS, CREATE_POST, DELETE_POST, LOGIN_USER, REGISTER_USER };
+export {
+    GET_POSTS,
+    CREATE_POST,
+    DELETE_POST,
+    LIKE_POST,
+    CREATE_COMMENT,
+    DELETE_COMMENT,
+    LOGIN_USER,
+    REGISTER_USER
+};

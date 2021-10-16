@@ -76,6 +76,7 @@ function Login(props) {
                 />
                 <Button type="submit">Login</Button>
             </Form>
+            <a href="/register">Register</a>
             {Object.keys(errors).length > 0 && (
                 <div className="ui error message">
                     <ul className="list">

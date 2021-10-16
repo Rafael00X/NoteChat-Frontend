@@ -1,5 +1,5 @@
 #notes-section .notecard {
-    margin: 4rem 0;
+    margin: 2rem 0;
     min-height: 15rem;
 }
 
@@ -28,4 +28,19 @@
 
 #notes-section .note-form {
     margin-top: 2rem;
+}
+
+#notes-section .note-form textarea {
+    border: none;
+    resize: none;
+}
+
+#notes-section .notecard .note-comments textarea {
+    overflow: auto;
+    resize: vertical;
+    width: 85%;
+}
+
+.no-border {
+    border: none !important;
 }
