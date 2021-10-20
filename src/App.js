@@ -1,9 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Container } from "semantic-ui-react";
+import { Container } from "react-bootstrap";
 
-import "semantic-ui-css/semantic.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import "./css/login.css";
+import "./css/register.css";
+import "./css/home.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -14,14 +17,18 @@ function App() {
     return (
         <AuthProvider>
             <Router>
-                <Container>
+                <Container id="root-container">
                     <HomeRoute exact path="/" component={Home} />
-                    <AuthRoute exact path="/login" component={Login} />
                     <AuthRoute exact path="/register" component={Register} />
+                    <AuthRoute exact path="/login" component={Login} />
                 </Container>
             </Router>
         </AuthProvider>
     );
 }
+
+// <HomeRoute exact path="/" component={Home} />
+// <AuthRoute exact path="/register" component={Register} />
+// <AuthRoute exact path="/login" component={Login} />
 
 export default App;

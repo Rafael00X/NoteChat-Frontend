@@ -1,0 +1,7 @@
+@import "note-section.css";
+
+#navbar-component {
+    height: calc(100% - 65px);
+    margin: auto;
+    overflow-y: auto;
+}

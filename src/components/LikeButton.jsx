@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Icon, Label } from "semantic-ui-react";
+import { Button } from "react-bootstrap";
+import { FaHeart } from "react-icons/fa";
 
 import { LIKE_POST } from "../util/graphql";
 
@@ -30,13 +31,11 @@ function LikeButton(props) {
     }, [likes, userId]);
 
     return (
-        <Button as="div" labelPosition="right">
-            <Button color="red" basic={!liked} onClick={handleLike}>
-                <Icon name="heart" />
-            </Button>
-            <Label as="a" basic color="red" pointing="left">
-                {likeCount}
-            </Label>
+        <Button variant={liked ? "danger" : "outline-danger"} onClick={handleLike}>
+            <span>
+                <FaHeart />
+                &nbsp;&nbsp;&nbsp;{likeCount}
+            </span>
         </Button>
     );
 }

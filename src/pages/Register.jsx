@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Container, Form } from "react-bootstrap";
 
 import { REGISTER_USER } from "../util/graphql";
 import { useForm } from "../util/hooks";
@@ -43,45 +43,40 @@ function Register(props) {
     }
 
     return (
-        <div className="form-container">
+        <Container id="register-form-container" className="light-glass form-container">
             <Form onSubmit={onSubmit} className={loading ? "loading" : ""}>
-                <h1>Register</h1>
-                <Form.Input
-                    label="Username"
-                    placeholder="Username"
+                <h3>Register</h3>
+                <Form.Control
+                    placeholder="Name"
                     name="username"
                     type="text"
                     value={values.username}
                     onChange={onChange}
                 />
-                <Form.Input
-                    label="Email"
+                <Form.Control
                     placeholder="Email"
                     name="email"
                     type="email"
                     value={values.email}
                     onChange={onChange}
                 />
-                <Form.Input
-                    label="Password"
+                <Form.Control
                     placeholder="Password"
                     name="password"
                     type="password"
-                    error={errors.password ? true : false}
                     value={values.password}
                     onChange={onChange}
                 />
-                <Form.Input
-                    label="Confirm Password"
-                    placeholder="Password"
+                <Form.Control
+                    placeholder="Confirm password"
                     name="confirmPassword"
                     type="password"
-                    error={errors.password ? true : false}
                     value={values.confirmPassword}
                     onChange={onChange}
                 />
                 <Button type="submit">Register</Button>
             </Form>
+            <a href="/login">Already a user? Login</a>
             {Object.keys(errors).length > 0 && (
                 <div className="ui error message">
                     <ul className="list">
@@ -91,7 +86,7 @@ function Register(props) {
                     </ul>
                 </div>
             )}
-        </div>
+        </Container>
     );
 }
 

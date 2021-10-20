@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Card, Image } from "semantic-ui-react";
+import { Card } from "react-bootstrap";
 
 import CommentButton from "./CommentButton";
 import DeleteButton from "./DeleteButton";
@@ -17,39 +17,38 @@ function NoteCard(props) {
     }
 
     return (
-        <Card className="notecard" fluid>
-            <Card.Content>
-                <Image
+        <Card className="note-card">
+            <Card.Body>
+                <img
                     className="note-avatar"
-                    floated="left"
-                    size="mini"
+                    alt=""
                     src="https://react.semantic-ui.com/images/avatar/large/molly.png"
                 />
-                <Card.Header as="a" className="note-header">
-                    {post.username}
-                </Card.Header>
+                <div className="note-header">
+                    <h5 role="button">{post.username}</h5>
+                    <p>{post.createdAt}</p>
+                </div>
                 <div className="note-modify-buttons">
                     {post.userId === user.id ? <DeleteButton postId={post.id} /> : null}
                 </div>
-                <Card.Meta>{`${post.createdAt}`}</Card.Meta>
-                <Card.Description>{post.body}</Card.Description>
-            </Card.Content>
-            <Card.Content extra>
-                <div className="ui fluid">
-                    <LikeButton
-                        userId={user.id}
-                        postId={post.id}
-                        likeCount={post.likeCount}
-                        likes={post.likes}
-                    />
-                    <CommentButton
-                        userId={post.userId}
-                        postId={post.id}
-                        commentCount={post.commentCount}
-                        callback={commentCallback}
-                    />
-                </div>
-            </Card.Content>
+                <Card.Text>{post.body}</Card.Text>
+            </Card.Body>
+
+            <Card.Body className="note-buttons">
+                <LikeButton
+                    userId={user.id}
+                    postId={post.id}
+                    likeCount={post.likeCount}
+                    likes={post.likes}
+                />
+                <CommentButton
+                    userId={post.userId}
+                    postId={post.id}
+                    commentCount={post.commentCount}
+                    callback={commentCallback}
+                />
+            </Card.Body>
+
             {showComments ? <NoteComments comments={post.comments} postId={post.id} /> : null}
         </Card>
     );

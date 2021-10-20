@@ -1,0 +1,87 @@
+#note-section {
+    max-width: 800px;
+}
+
+#note-section .note-card {
+    margin: 2rem 0;
+}
+
+#note-section .note-avatar {
+    display: inline-block;
+    border-radius: 10px;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 1rem;
+    margin-bottom: 2rem;
+}
+
+#note-section .note-header {
+    display: inline-block;
+    margin-top: 0px;
+    text-decoration: none !important;
+}
+
+#note-section .note-header h5 {
+    display: inline;
+}
+
+#note-section .note-header p {
+    font-size: 0.8rem;
+}
+
+#note-section .note-modify-buttons {
+    display: inline;
+    float: right;
+}
+
+#note-section .note-buttons button {
+    width: 140px;
+    margin-right: 10px;
+    box-shadow: none;
+    outline: none;
+}
+
+#note-section .note-form {
+    margin-top: 2rem;
+}
+
+#note-section .note-form textarea {
+    border: none;
+    resize: none;
+}
+/*
+#note-section .notecard .note-comments textarea {
+    overflow: auto;
+    resize: vertical;
+    width: 85%;
+}
+*/
+/* --------------------------------------- Comment --------------------------------------- */
+
+#note-section .comment {
+    padding: 10px;
+}
+
+#note-section .comment-avatar {
+    float: left;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+#note-section .comment-body {
+    display: inline-block;
+    width: calc(100% - 100px);
+    padding: 0 10px;
+}
+
+#note-section .comment-body p {
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+#note-section .comment-modify-buttons {
+    float: right;
+    padding: 10px;
+}

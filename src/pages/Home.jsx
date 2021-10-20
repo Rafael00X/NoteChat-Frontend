@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Grid, Image, Menu } from "semantic-ui-react";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 import NoteSection from "../components/NoteSection";
 import ProfileSection from "../components/ProfileSection";
@@ -10,7 +10,8 @@ function Home() {
     const [activeItem, setActiveItem] = useState("home");
     const [component, setComponent] = useState(<NoteSection />);
 
-    function handleItemClick(event, { name }) {
+    function handleItemClick(event) {
+        const name = event.target.getAttribute("name");
         setActiveItem(name);
         switch (name) {
             case "home":
@@ -28,40 +29,37 @@ function Home() {
     }
 
     return (
-        <div>
-            <Grid>
-                <Grid.Row>
-                    <Grid.Column width={3}>
-                        <Menu pointing secondary vertical>
-                            <Menu.Item
-                                name="home"
-                                active={activeItem === "home"}
-                                onClick={handleItemClick}
-                            />
-                            <Menu.Item
-                                name="profile"
-                                active={activeItem === "profile"}
-                                onClick={handleItemClick}
-                            />
-                            <Menu.Item
-                                name="settings"
-                                active={activeItem === "settings"}
-                                onClick={handleItemClick}
-                            />
-                            <Menu.Item
-                                name="logout"
-                                active={activeItem === "logout"}
-                                onClick={handleItemClick}
-                            />
-                        </Menu>
-                    </Grid.Column>
-                    <Grid.Column width={10}>{component}</Grid.Column>
-                    <Grid.Column width={3}>
-                        <Image src="https://react.semantic-ui.com/images/wireframe/paragraph.png" />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
-        </div>
+        <Container className="light-glass" id="dashboard">
+            <Navbar bg="dark" variant="dark">
+                <Container>
+                    <Navbar.Brand>
+                        <img
+                            alt=""
+                            src="/logo.svg"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                        />{" "}
+                        NoteChat
+                    </Navbar.Brand>
+                    <Nav className="me-auto" id="navbar-items">
+                        <Nav.Link name="home" onClick={handleItemClick}>
+                            Home
+                        </Nav.Link>
+                        <Nav.Link name="chat" onClick={handleItemClick}>
+                            Chat
+                        </Nav.Link>
+                        <Nav.Link name="profile" onClick={handleItemClick}>
+                            Profile
+                        </Nav.Link>
+                        <Nav.Link name="logout" onClick={handleItemClick}>
+                            Logout
+                        </Nav.Link>
+                    </Nav>
+                </Container>
+            </Navbar>
+            <div id="navbar-component">{component}</div>
+        </Container>
     );
 }
 

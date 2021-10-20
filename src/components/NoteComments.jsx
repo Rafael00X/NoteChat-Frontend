@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Form, TextArea } from "semantic-ui-react";
+import { Button, Form } from "react-bootstrap";
 
 import Comment from "./Comment";
 import { CREATE_COMMENT, DELETE_COMMENT } from "../util/graphql";
@@ -39,7 +39,8 @@ function NoteComments(props) {
         setText(event.target.value);
     }
 
-    function onSubmit() {
+    function onSubmit(event) {
+        event.preventDefault();
         createComment();
         setText("");
     }
@@ -47,9 +48,10 @@ function NoteComments(props) {
     return (
         <div className="note-comments">
             <Form onSubmit={onSubmit}>
-                <TextArea
+                <Form.Control
+                    as="textarea"
+                    rows={1}
                     name="body"
-                    rows="1"
                     placeholder="Enter comment..."
                     type="text"
                     value={text}
@@ -57,9 +59,11 @@ function NoteComments(props) {
                 />
                 <Button type="submit">Post</Button>
             </Form>
-            {comments.map((comment) => (
-                <Comment key={comment.id} comment={comment} callback={deleteCallback} />
-            ))}
+            <div>
+                {comments.map((comment) => (
+                    <Comment key={comment.id} comment={comment} callback={deleteCallback} />
+                ))}
+            </div>
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Container, Form } from "react-bootstrap";
 
 import { LOGIN_USER } from "../util/graphql";
 import { useForm } from "../util/hooks";
@@ -36,47 +36,27 @@ function Login(props) {
         loginUser();
     }
 
-    /*
-
-    function onSubmit(event) {
-        event.preventDefault();
-        console.log(event.target);
-        console.log(event.target[0]);
-
-        const values = {
-            email: event.target.email.value,
-            password: event.target.password.value
-        };
-
-        loginUser({ variables: values });
-    }
-    */
-
     return (
-        <div className="form-container">
+        <Container id="login-form-container" className="light-glass form-container">
             <Form onSubmit={onSubmit} className={loading ? "loading" : ""}>
-                <h1>Login</h1>
-                <Form.Input
-                    label="Email"
+                <h3>Login</h3>
+                <Form.Control
                     placeholder="Email"
                     name="email"
                     type="email"
-                    error={errors.email ? true : false}
                     value={values.email}
                     onChange={onChange}
                 />
-                <Form.Input
-                    label="Password"
+                <Form.Control
                     placeholder="Password"
                     name="password"
                     type="password"
-                    error={errors.password ? true : false}
                     value={values.password}
                     onChange={onChange}
                 />
                 <Button type="submit">Login</Button>
             </Form>
-            <a href="/register">Register</a>
+            <a href="/register">Not a user? Register</a>
             {Object.keys(errors).length > 0 && (
                 <div className="ui error message">
                     <ul className="list">
@@ -86,7 +66,7 @@ function Login(props) {
                     </ul>
                 </div>
             )}
-        </div>
+        </Container>
     );
 }
 

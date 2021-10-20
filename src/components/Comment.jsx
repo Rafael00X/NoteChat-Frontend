@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 
 import { AuthContext } from "../context/authorization";
-import { Icon } from "semantic-ui-react";
 
 function Comment(props) {
     const { comment, callback } = props;
@@ -15,16 +15,25 @@ function Comment(props) {
     }
 
     return (
-        <div>
-            <span>
-                <strong>{comment.username}</strong> - {comment.body}
-            </span>
+        <div className="comment">
+            <img
+                className="comment-avatar"
+                alt=""
+                src="https://react.semantic-ui.com/images/avatar/large/molly.png"
+            />
+            <div className="comment-body">
+                <span>
+                    <strong>{comment.username}</strong>
+                </span>
+                <p>{comment.body}</p>
+            </div>
+
             {user.id === comment.userId ? (
-                <Icon
-                    name="trash alternate"
-                    style={{ margin: 0, color: "red" }}
-                    onClick={handleDelete}
-                />
+                <div className="comment-modify-buttons">
+                    <i role="button" onClick={handleDelete}>
+                        <FaTrashAlt />
+                    </i>
+                </div>
             ) : null}
         </div>
     );

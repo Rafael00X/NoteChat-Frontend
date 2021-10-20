@@ -1,6 +1,6 @@
 import React from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Icon } from "semantic-ui-react";
+import { Button } from "react-bootstrap";
 
 import { GET_POSTS, DELETE_POST } from "../util/graphql";
 
@@ -29,13 +29,13 @@ function DeleteButton(props) {
     });
 
     function handleDelete(event) {
-        event.target.classList.add("loading");
+        //event.target.classList.add("loading");
         deletePost();
     }
 
     return (
-        <Button onClick={handleDelete}>
-            <Icon name="trash alternate" style={{ margin: 0 }} />
+        <Button variant="outline-warning" onClick={handleDelete}>
+            Delete
         </Button>
     );
 }

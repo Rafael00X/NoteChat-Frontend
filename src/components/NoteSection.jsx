@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { Container } from "semantic-ui-react";
+import { Container } from "react-bootstrap";
 
 import NoteCard from "../components/NoteCard";
 import NoteForm from "../components/NoteForm";
@@ -12,7 +12,7 @@ function NoteSection() {
     if (error) return `Error! ${error.message}`;
 
     return (
-        <Container id="notes-section">
+        <Container id="note-section">
             <NoteForm />
             {loading ? (
                 <h1>Loading posts...</h1>

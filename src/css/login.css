@@ -1,0 +1,11 @@
+#login-form-container {
+    padding: 40px;
+    width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+#login-form-container a {
+    display: block;
+    margin: 20px;
+}

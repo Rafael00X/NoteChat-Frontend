@@ -1,0 +1,11 @@
+#register-form-container {
+    padding: 40px;
+    width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+#register-form-container a {
+    display: block;
+    margin: 20px;
+}
