@@ -1,7 +1,11 @@
 @import "note-section.css";
 
 #navbar-component {
-    height: calc(100% - 65px);
+    height: calc(100% - 56px);
     margin: auto;
     overflow-y: auto;
+}
+
+.dropdown-menu.show {
+    right: -10px;
 }

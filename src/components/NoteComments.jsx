@@ -49,6 +49,7 @@ function NoteComments(props) {
         <div className="note-comments">
             <Form onSubmit={onSubmit}>
                 <Form.Control
+                    className="comment-textarea"
                     as="textarea"
                     rows={1}
                     name="body"
@@ -57,7 +58,9 @@ function NoteComments(props) {
                     value={text}
                     onChange={onChange}
                 />
-                <Button type="submit">Post</Button>
+                <Button className="comment-send-btn" type="submit">
+                    Post
+                </Button>
             </Form>
             <div>
                 {comments.map((comment) => (

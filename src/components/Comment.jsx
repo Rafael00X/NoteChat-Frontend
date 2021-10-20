@@ -25,6 +25,7 @@ function Comment(props) {
                 <span>
                     <strong>{comment.username}</strong>
                 </span>
+                <p>{comment.createdAt}</p>
                 <p>{comment.body}</p>
             </div>
 

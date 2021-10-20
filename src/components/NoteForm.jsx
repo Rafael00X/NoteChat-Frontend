@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Collapse, Form } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 
 import { CREATE_POST, GET_POSTS } from "../util/graphql";
@@ -29,7 +29,7 @@ function NoteForm() {
 
     function onSubmit(event) {
         event.preventDefault();
-        if (text !== "") {
+        if (text.trim() !== "") {
             createPost();
         }
         setText("");
@@ -44,27 +44,39 @@ function NoteForm() {
     }
 
     return (
-        <Form onSubmit={onSubmit} className="note-form">
-            <Form.Control
-                as="textarea"
-                rows={1}
-                id="new-note-body"
-                placeholder="Add a note..."
-                name="body"
-                value={text}
-                onChange={onChange}
-                onBlur={toggleVisibility}
-            />
+        <div className="note-form">
+            <Form onSubmit={onSubmit}>
+                <Form.Control
+                    as="textarea"
+                    rows={1}
+                    id="new-note-body"
+                    placeholder="Add a note..."
+                    name="body"
+                    value={text}
+                    onChange={onChange}
+                    onBlur={toggleVisibility}
+                />
 
-            <div className="ui two buttons">
-                <Button variant="dark" type="submit" disabled={text === ""}>
-                    Post
-                </Button>
-                <Button type="button" onClick={handleClearClick}>
-                    Clear
-                </Button>
-            </div>
-        </Form>
+                <Collapse in={text.trim() !== ""}>
+                    <div>
+                        <Button
+                            variant="primary"
+                            type="submit"
+                            disabled={text === ""}
+                            style={{ marginRight: "5px" }}>
+                            Post
+                        </Button>
+                        <Button
+                            variant="dark"
+                            type="button"
+                            disabled={text === ""}
+                            onClick={handleClearClick}>
+                            Clear
+                        </Button>
+                    </div>
+                </Collapse>
+            </Form>
+        </div>
     );
 }
 

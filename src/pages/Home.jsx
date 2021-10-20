@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { FaPowerOff, FaUser } from "react-icons/fa";
 
 import NoteSection from "../components/NoteSection";
-import ProfileSection from "../components/ProfileSection";
+import ChatSection from "../components/ChatSection";
 import { AuthContext } from "../context/authorization";
 
 function Home() {
@@ -12,13 +13,17 @@ function Home() {
 
     function handleItemClick(event) {
         const name = event.target.getAttribute("name");
-        setActiveItem(name);
+
         switch (name) {
             case "home":
                 setComponent(<NoteSection />);
+                setActiveItem(name);
+                break;
+            case "chat":
+                setComponent(<ChatSection />);
+                setActiveItem(name);
                 break;
             case "profile":
-                setComponent(<ProfileSection />);
                 break;
             case "logout":
                 context.logout();
@@ -42,19 +47,36 @@ function Home() {
                         />{" "}
                         NoteChat
                     </Navbar.Brand>
-                    <Nav className="me-auto" id="navbar-items">
-                        <Nav.Link name="home" onClick={handleItemClick}>
+                    <Nav activeKey={activeItem} id="navbar-items" style={{ width: "100%" }}>
+                        <Nav.Link name="home" eventKey="home" onClick={handleItemClick}>
                             Home
                         </Nav.Link>
-                        <Nav.Link name="chat" onClick={handleItemClick}>
+                        <Nav.Link
+                            className="me-auto"
+                            name="chat"
+                            eventKey="chat"
+                            onClick={handleItemClick}>
                             Chat
                         </Nav.Link>
-                        <Nav.Link name="profile" onClick={handleItemClick}>
-                            Profile
-                        </Nav.Link>
-                        <Nav.Link name="logout" onClick={handleItemClick}>
-                            Logout
-                        </Nav.Link>
+                        <NavDropdown
+                            align={{ lg: "end" }}
+                            title={
+                                <img
+                                    className="comment-avatar"
+                                    alt=""
+                                    src="https://react.semantic-ui.com/images/avatar/large/molly.png"
+                                    style={{ borderRadius: "50%", width: "30px", height: "30px" }}
+                                />
+                            }>
+                            <NavDropdown.Item name="profile" onClick={handleItemClick}>
+                                <FaUser />
+                                &nbsp; Profile
+                            </NavDropdown.Item>
+                            <NavDropdown.Item name="logout" onClick={handleItemClick}>
+                                <FaPowerOff />
+                                &nbsp; Logout
+                            </NavDropdown.Item>
+                        </NavDropdown>
                     </Nav>
                 </Container>
             </Navbar>

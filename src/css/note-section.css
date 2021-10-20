@@ -42,12 +42,16 @@
 }
 
 #note-section .note-form {
+    background-color: #ffffff;
+    border-radius: 2px;
     margin-top: 2rem;
+    padding: 10px;
 }
 
 #note-section .note-form textarea {
     border: none;
     resize: none;
+    margin-bottom: 10px;
 }
 /*
 #note-section .notecard .note-comments textarea {
@@ -71,6 +75,8 @@
 }
 
 #note-section .comment-body {
+    background-color: #eee;
+    border-radius: 10px;
     display: inline-block;
     width: calc(100% - 100px);
     padding: 0 10px;
@@ -84,4 +90,19 @@
 #note-section .comment-modify-buttons {
     float: right;
     padding: 10px;
+}
+
+#note-section .note-comments {
+    border-top: 1px solid gray;
+    padding: 10px;
+}
+
+#note-section .comment-textarea {
+    width: 80%;
+    display: inline-block;
+}
+
+#note-section .comment-send-btn {
+    float: right;
+    margin: auto;
 }
