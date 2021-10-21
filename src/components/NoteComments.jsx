@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { Button, Form } from "react-bootstrap";
+import { Button, Card, Form } from "react-bootstrap";
 
 import Comment from "./Comment";
 import { CREATE_COMMENT, DELETE_COMMENT } from "../util/graphql";
@@ -46,7 +46,7 @@ function NoteComments(props) {
     }
 
     return (
-        <div className="note-comments">
+        <Card.Body className="note-comments">
             <Form onSubmit={onSubmit}>
                 <Form.Control
                     className="comment-textarea"
@@ -67,7 +67,7 @@ function NoteComments(props) {
                     <Comment key={comment.id} comment={comment} callback={deleteCallback} />
                 ))}
             </div>
-        </div>
+        </Card.Body>
     );
 }
 

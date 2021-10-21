@@ -6,7 +6,6 @@
 html {
     height: 100%;
 }
-
 body {
     height: 100%;
 }
@@ -15,25 +14,27 @@ body {
     height: 100%;
 }
 
+/* Input tag */
+/*
 input:-webkit-autofill {
+    background-clip: text;
     -webkit-background-clip: text;
 }
+*/
+/* Scrollbar */
 
 ::-webkit-scrollbar {
     width: 5px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
     background: transparent;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
     background: #223;
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #223;
 }

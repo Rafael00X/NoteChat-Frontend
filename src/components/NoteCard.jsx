@@ -45,6 +45,7 @@ function NoteCard(props) {
                     userId={post.userId}
                     postId={post.id}
                     commentCount={post.commentCount}
+                    active={showComments}
                     callback={commentCallback}
                 />
             </Card.Body>

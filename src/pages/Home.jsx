@@ -4,12 +4,18 @@ import { FaPowerOff, FaUser } from "react-icons/fa";
 
 import NoteSection from "../components/NoteSection";
 import ChatSection from "../components/ChatSection";
+import ConfirmDialog from "../components/ConfirmDialog";
 import { AuthContext } from "../context/authorization";
 
 function Home() {
     const context = useContext(AuthContext);
     const [activeItem, setActiveItem] = useState("home");
     const [component, setComponent] = useState(<NoteSection />);
+    const [show, setShow] = useState(false);
+
+    function logoutCallback() {
+        context.logout();
+    }
 
     function handleItemClick(event) {
         const name = event.target.getAttribute("name");
@@ -26,7 +32,7 @@ function Home() {
             case "profile":
                 break;
             case "logout":
-                context.logout();
+                setShow(true);
                 break;
             default:
                 console.log("Invalid component");
@@ -80,6 +86,14 @@ function Home() {
                     </Nav>
                 </Container>
             </Navbar>
+
+            <ConfirmDialog
+                title="Logout"
+                body="Are you sure you want to logout?"
+                callback={logoutCallback}
+                state={[show, setShow]}
+            />
+
             <div id="navbar-component">{component}</div>
         </Container>
     );

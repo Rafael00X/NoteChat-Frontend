@@ -1,4 +1,5 @@
 import React from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useQuery } from "@apollo/client";
 import { Container } from "react-bootstrap";
 
@@ -17,7 +18,23 @@ function NoteSection() {
             {loading ? (
                 <h1>Loading posts...</h1>
             ) : (
-                data.getPosts && data.getPosts.map((post) => <NoteCard key={post.id} post={post} />)
+                data.getPosts && (
+                    <TransitionGroup>
+                        {data.getPosts.map((post) => {
+                            return (
+                                <CSSTransition
+                                    key={post.id}
+                                    classNames="fade"
+                                    timeout={500}
+                                    appear={false}
+                                    in={true}
+                                    exit={true}>
+                                    <NoteCard post={post} />
+                                </CSSTransition>
+                            );
+                        })}
+                    </TransitionGroup>
+                )
             )}
         </Container>
     );

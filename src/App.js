@@ -4,9 +4,6 @@ import { Container } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import "./css/login.css";
-import "./css/register.css";
-import "./css/home.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";

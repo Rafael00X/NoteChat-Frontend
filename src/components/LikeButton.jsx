@@ -31,7 +31,7 @@ function LikeButton(props) {
     }, [likes, userId]);
 
     return (
-        <Button variant={liked ? "danger" : "outline-danger"} onClick={handleLike}>
+        <Button className={"like-btn" + (liked ? " filled" : "")} onClick={handleLike}>
             <span>
                 <FaHeart />
                 &nbsp;&nbsp;&nbsp;{likeCount}
@@ -41,3 +41,4 @@ function LikeButton(props) {
 }
 
 export default LikeButton;
+//variant={liked ? "danger" : "outline-danger"}

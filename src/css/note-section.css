@@ -2,6 +2,19 @@
     max-width: 800px;
 }
 
+#note-section .note-form {
+    background-color: #ffffff;
+    border-radius: 2px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+#note-section .note-form textarea {
+    border: none;
+    resize: none;
+    margin-bottom: 10px;
+}
+
 #note-section .note-card {
     margin: 2rem 0;
 }
@@ -9,10 +22,10 @@
 #note-section .note-avatar {
     display: inline-block;
     border-radius: 10px;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-right: 1rem;
-    margin-bottom: 2rem;
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    margin-bottom: 30px;
 }
 
 #note-section .note-header {
@@ -37,39 +50,33 @@
 #note-section .note-buttons button {
     width: 140px;
     margin-right: 10px;
+    -webkit-box-shadow: none;
     box-shadow: none;
     outline: none;
 }
 
-#note-section .note-form {
-    background-color: #ffffff;
-    border-radius: 2px;
-    margin-top: 2rem;
-    padding: 10px;
+#note-section .note-comments {
+    border-top: 1px solid gray;
 }
 
-#note-section .note-form textarea {
-    border: none;
-    resize: none;
-    margin-bottom: 10px;
+#note-section .comment-textarea {
+    width: calc(100% - 65px);
+    display: inline-block;
 }
-/*
-#note-section .notecard .note-comments textarea {
-    overflow: auto;
-    resize: vertical;
-    width: 85%;
+
+#note-section .comment-send-btn {
+    float: right;
+    margin: auto;
 }
-*/
-/* --------------------------------------- Comment --------------------------------------- */
 
 #note-section .comment {
-    padding: 10px;
+    padding: 10px 0;
 }
 
 #note-section .comment-avatar {
     float: left;
-    height: 2rem;
-    width: 2rem;
+    height: 30px;
+    width: 30px;
     border-radius: 50%;
     margin-right: 20px;
 }
@@ -89,20 +96,28 @@
 
 #note-section .comment-modify-buttons {
     float: right;
-    padding: 10px;
+    padding: 0 10px;
 }
 
-#note-section .note-comments {
-    border-top: 1px solid gray;
-    padding: 10px;
+#note-section .like-btn {
+    background-color: #fff;
+    border-color: #dc3545;
+    color: #dc3545;
 }
 
-#note-section .comment-textarea {
-    width: 80%;
-    display: inline-block;
+#note-section .like-btn.filled {
+    background-color: #dc3545;
+    color: #fff;
 }
 
-#note-section .comment-send-btn {
-    float: right;
-    margin: auto;
+#note-section .comment-btn {
+    background-color: #fff;
+    border-color: #5aaaff;
+    color: #5aaaff;
 }
+
+#note-section .comment-btn.filled {
+    background-color: #5aaaff;
+    color: #fff;
+}
+/*# sourceMappingURL=note-section.css.map */

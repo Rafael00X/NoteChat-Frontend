@@ -3,10 +3,10 @@ import { Button } from "react-bootstrap";
 import { FaComments } from "react-icons/fa";
 
 function CommentButton(props) {
-    const { commentCount, callback } = props;
+    const { commentCount, active, callback } = props;
 
     return (
-        <Button variant="outline-primary" onClick={callback}>
+        <Button className={"comment-btn" + (active ? " filled" : "")} onClick={callback}>
             <span>
                 <FaComments />
                 &nbsp;&nbsp;&nbsp;{commentCount}

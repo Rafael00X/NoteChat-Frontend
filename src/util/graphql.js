@@ -43,6 +43,13 @@ const CREATE_POST = gql`
                 createdAt
             }
             commentCount
+            comments {
+                id
+                userId
+                username
+                body
+                createdAt
+            }
         }
     }
 `;
