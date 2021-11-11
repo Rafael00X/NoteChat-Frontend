@@ -110,6 +110,8 @@ const LOGIN_USER = gql`
             email
             username
             createdAt
+            conversations
+            posts
             token
         }
     }
@@ -127,6 +129,60 @@ const REGISTER_USER = gql`
     }
 `;
 
+const GET_CONVERSATION = gql`
+    query GetConversation($conversationId: ID!) {
+        getConversation(conversationId: $conversationId) {
+            id
+            userIds
+            messages {
+                id
+                userId
+                body
+                createdAt
+            }
+            createdAt
+        }
+    }
+`;
+
+const CREATE_CONVERSATION = gql`
+    mutation CreateConversation($userIds: ID!) {
+        createConversation(userIds: $userIds) {
+            id
+            userIds
+            messages {
+                id
+                userId
+                body
+                createdAt
+            }
+            createdAt
+        }
+    }
+`;
+
+const CREATE_MESSAGE = gql`
+    mutation CreateMessage($conversationId: ID!, $body: String!) {
+        createMessage(conversationId: $conversationId, body: $body) {
+            id
+            userId
+            body
+            createdAt
+        }
+    }
+`;
+
+const DELETE_MESSAGE = gql`
+    mutation DeleteMessage($conversationId: ID!, $messageId: ID!) {
+        deleteMessage(conversationId: $conversationId, messageId: $messageId) {
+            id
+            userIds
+            messages
+            createdAt
+        }
+    }
+`;
+
 export {
     GET_POSTS,
     CREATE_POST,
@@ -135,5 +191,9 @@ export {
     CREATE_COMMENT,
     DELETE_COMMENT,
     LOGIN_USER,
-    REGISTER_USER
+    REGISTER_USER,
+    GET_CONVERSATION,
+    CREATE_CONVERSATION,
+    CREATE_MESSAGE,
+    DELETE_MESSAGE
 };

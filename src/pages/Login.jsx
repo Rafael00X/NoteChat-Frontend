@@ -21,6 +21,7 @@ function Login(props) {
     const [loginUser, { loading }] = useMutation(LOGIN_USER, {
         // Query successful
         update(_, { data }) {
+            localStorage.setItem("user", JSON.stringify(data.login));
             context.login(data.login);
             props.history.push("/"); // Takes to home page "/"
         },

@@ -1,0 +1,51 @@
+#chat-section {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.contact-list {
+    float: left;
+    width: 400px;
+}
+
+.conversation-card {
+    padding: 15px;
+}
+
+.conversation-card .avatar {
+    border-radius: 50px;
+    height: 25px;
+    width: 25px;
+}
+
+.conversation-card .body {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.conversation-card .body .name {
+    display: block;
+    width: 280px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.inbox {
+    margin-left: 5px;
+    width: 400px;
+    height: 100%;
+    overflow: scroll;
+}
+
+.inbox .message-sent {
+    background-color: teal;
+    float: right;
+    width: 250px;
+}
+
+.inbox .message-received {
+    background-color: wheat;
+    float: left;
+    width: 250px;
+}

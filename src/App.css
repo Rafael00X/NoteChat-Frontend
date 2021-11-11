@@ -3,6 +3,7 @@
 @import "./css/home.css";
 @import "./css/transitions.css";
 @import "./css/note-section.css";
+@import "./css/chat-section.css";
 
 body {
     background-color: #352384;

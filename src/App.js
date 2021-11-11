@@ -10,6 +10,12 @@ import Register from "./pages/Register";
 import { AuthProvider } from "./context/authorization";
 import { AuthRoute, HomeRoute } from "./util/customRoutes";
 
+/*
+import io from "socket.io-client";
+
+const socket = io("http://localhost:9000");
+*/
+
 function App() {
     return (
         <AuthProvider>

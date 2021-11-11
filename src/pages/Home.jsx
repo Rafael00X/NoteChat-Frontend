@@ -14,6 +14,7 @@ function Home() {
     const [show, setShow] = useState(false);
 
     function logoutCallback() {
+        localStorage.removeItem("user");
         context.logout();
     }
 
