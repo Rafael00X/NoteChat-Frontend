@@ -4,18 +4,21 @@ import { useMutation } from "@apollo/client";
 import { IoMdSend } from "react-icons/io";
 
 import { CREATE_MESSAGE, GET_CONVERSATION } from "../util/graphql";
+import { useSocketContext } from "../context/socketProvider";
 
 function CommentForm(props) {
-    const { id } = props;
+    const { id, recipientId } = props;
     const [text, setText] = useState("");
+    const socket = useSocketContext();
 
     const [createMessage] = useMutation(CREATE_MESSAGE, {
         update(cache, result) {
+            sendMessage(id, recipientId, result.data.createMessage);
+
             const data = cache.readQuery({
                 query: GET_CONVERSATION,
                 variables: { conversationId: id }
             });
-            // console.log(data);
 
             cache.writeQuery({
                 query: GET_CONVERSATION,
@@ -47,6 +50,10 @@ function CommentForm(props) {
             createMessage();
         }
         setText("");
+    }
+
+    function sendMessage(conversationId, recipient, message) {
+        socket.emit("send-message", { conversationId, recipient, message });
     }
 
     return (

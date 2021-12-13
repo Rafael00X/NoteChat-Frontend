@@ -6,12 +6,16 @@ import NoteSection from "../components/NoteSection";
 import ChatSection from "../components/ChatSection";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { AuthContext } from "../context/authorization";
+import { SocketProvider } from "../context/socketProvider";
 
 function Home() {
     const context = useContext(AuthContext);
     const [activeItem, setActiveItem] = useState("home");
     const [component, setComponent] = useState(<NoteSection />);
     const [show, setShow] = useState(false);
+
+    const user = context.user;
+    // console.log(user);
 
     function logoutCallback() {
         localStorage.removeItem("user");
@@ -41,62 +45,68 @@ function Home() {
     }
 
     return (
-        <Container className="light-glass" id="dashboard">
-            <Navbar bg="dark" variant="dark">
-                <Container>
-                    <Navbar.Brand>
-                        <img
-                            alt=""
-                            src="/logo.svg"
-                            width="30"
-                            height="30"
-                            className="d-inline-block align-top"
-                        />{" "}
-                        NoteChat
-                    </Navbar.Brand>
-                    <Nav activeKey={activeItem} id="navbar-items" style={{ width: "100%" }}>
-                        <Nav.Link name="home" eventKey="home" onClick={handleItemClick}>
-                            Home
-                        </Nav.Link>
-                        <Nav.Link
-                            className="me-auto"
-                            name="chat"
-                            eventKey="chat"
-                            onClick={handleItemClick}>
-                            Chat
-                        </Nav.Link>
-                        <NavDropdown
-                            align={{ lg: "end" }}
-                            title={
-                                <img
-                                    className="comment-avatar"
-                                    alt=""
-                                    src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-                                    style={{ borderRadius: "50%", width: "30px", height: "30px" }}
-                                />
-                            }>
-                            <NavDropdown.Item name="profile" onClick={handleItemClick}>
-                                <FaUser />
-                                &nbsp; Profile
-                            </NavDropdown.Item>
-                            <NavDropdown.Item name="logout" onClick={handleItemClick}>
-                                <FaPowerOff />
-                                &nbsp; Logout
-                            </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                </Container>
-            </Navbar>
+        <SocketProvider id={user.id}>
+            <Container className="light-glass" id="dashboard">
+                <Navbar bg="dark" variant="dark">
+                    <Container>
+                        <Navbar.Brand>
+                            <img
+                                alt=""
+                                src="/logo.svg"
+                                width="30"
+                                height="30"
+                                className="d-inline-block align-top"
+                            />{" "}
+                            NoteChat
+                        </Navbar.Brand>
+                        <Nav activeKey={activeItem} id="navbar-items" style={{ width: "100%" }}>
+                            <Nav.Link name="home" eventKey="home" onClick={handleItemClick}>
+                                Home
+                            </Nav.Link>
+                            <Nav.Link
+                                className="me-auto"
+                                name="chat"
+                                eventKey="chat"
+                                onClick={handleItemClick}>
+                                Chat
+                            </Nav.Link>
+                            <NavDropdown
+                                align={{ lg: "end" }}
+                                title={
+                                    <img
+                                        className="comment-avatar"
+                                        alt=""
+                                        src="https://react.semantic-ui.com/images/avatar/large/molly.png"
+                                        style={{
+                                            borderRadius: "50%",
+                                            width: "30px",
+                                            height: "30px"
+                                        }}
+                                    />
+                                }>
+                                <NavDropdown.Item name="profile" onClick={handleItemClick}>
+                                    <FaUser />
+                                    &nbsp; Profile
+                                </NavDropdown.Item>
+                                <NavDropdown.Item name="logout" onClick={handleItemClick}>
+                                    <FaPowerOff />
+                                    &nbsp; Logout
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                        </Nav>
+                    </Container>
+                </Navbar>
 
-            <ConfirmDialog
-                title="Logout"
-                body="Are you sure you want to logout?"
-                callback={logoutCallback}
-                state={[show, setShow]}
-            />
+                <ConfirmDialog
+                    title="Logout"
+                    body="Are you sure you want to logout?"
+                    callback={logoutCallback}
+                    state={[show, setShow]}
+                />
 
-            <div id="navbar-component">{component}</div>
-        </Container>
+                <div id="navbar-component">{component}</div>
+            </Container>
+        </SocketProvider>
     );
 }
 
