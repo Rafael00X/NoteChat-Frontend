@@ -3,8 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { IoMdSend } from "react-icons/io";
 
-import { CREATE_MESSAGE, GET_CONVERSATION } from "../util/graphql";
-import { useSocketContext } from "../context/socketProvider";
+import { CREATE_MESSAGE, GET_CONVERSATION } from "../../util/graphql";
+import { useSocketContext } from "../../context/socketProvider";
 
 function CommentForm(props) {
     const { id, recipientId } = props;

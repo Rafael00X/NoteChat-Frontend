@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaPowerOff, FaUser } from "react-icons/fa";
 
-import NoteSection from "../components/NoteSection";
-import ChatSection from "../components/ChatSection";
+import NoteSection from "../components/note/NoteSection";
+import ChatSection from "../components/chat/ChatSection";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { AuthContext } from "../context/authorization";
 import { SocketProvider } from "../context/socketProvider";

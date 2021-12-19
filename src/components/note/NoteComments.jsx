@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { Button, Card, Form } from "react-bootstrap";
 
 import Comment from "./Comment";
-import { CREATE_COMMENT, DELETE_COMMENT } from "../util/graphql";
+import { CREATE_COMMENT, DELETE_COMMENT } from "../../util/graphql";
 
 function NoteComments(props) {
     const { comments, postId } = props;

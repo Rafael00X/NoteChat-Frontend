@@ -146,7 +146,7 @@ const GET_CONVERSATION = gql`
 `;
 
 const CREATE_CONVERSATION = gql`
-    mutation CreateConversation($userIds: ID!) {
+    mutation CreateConversation($userIds: [ID]!) {
         createConversation(userIds: $userIds) {
             id
             userIds

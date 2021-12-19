@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Collapse, Form } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 
-import { CREATE_POST, GET_POSTS } from "../util/graphql";
+import { CREATE_POST, GET_POSTS } from "../../util/graphql";
 
 function NoteForm() {
     const [text, setText] = useState("");

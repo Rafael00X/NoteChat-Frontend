@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useApolloClient, useQuery } from "@apollo/client";
 
 import MessageForm from "./MessageForm";
-import { GET_CONVERSATION } from "../util/graphql";
-import { useSocketContext } from "../context/socketProvider";
+import { GET_CONVERSATION } from "../../util/graphql";
+import { useSocketContext } from "../../context/socketProvider";
 
 function Inbox(props) {
     const { conversationId, userId } = props;

@@ -3,9 +3,9 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useQuery } from "@apollo/client";
 import { Container } from "react-bootstrap";
 
-import NoteCard from "../components/NoteCard";
-import NoteForm from "../components/NoteForm";
-import { GET_POSTS } from "../util/graphql";
+import NoteCard from "./NoteCard";
+import NoteForm from "./NoteForm";
+import { GET_POSTS } from "../../util/graphql";
 
 function NoteSection() {
     const { loading, error, data } = useQuery(GET_POSTS);

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
-import { AuthContext } from "../context/authorization";
-import ConfirmDialog from "./ConfirmDialog";
+import { AuthContext } from "../../context/authorization";
+import ConfirmDialog from "../ConfirmDialog";
 
 function Comment(props) {
     const { comment, callback } = props;

@@ -5,7 +5,7 @@ import CommentButton from "./CommentButton";
 import DeleteButton from "./DeleteButton";
 import LikeButton from "./LikeButton";
 import NoteComments from "./NoteComments";
-import { AuthContext } from "../context/authorization";
+import { AuthContext } from "../../context/authorization";
 
 function NoteCard(props) {
     const { post } = props;

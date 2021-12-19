@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { Button } from "react-bootstrap";
 import { FaHeart } from "react-icons/fa";
 
-import { LIKE_POST } from "../util/graphql";
+import { LIKE_POST } from "../../util/graphql";
 
 function LikeButton(props) {
     const { likeCount, likes, userId, postId } = props;

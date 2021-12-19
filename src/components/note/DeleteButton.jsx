@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { Button } from "react-bootstrap";
 
-import { GET_POSTS, DELETE_POST } from "../util/graphql";
-import ConfirmDialog from "./ConfirmDialog";
+import { GET_POSTS, DELETE_POST } from "../../util/graphql";
+import ConfirmDialog from "../ConfirmDialog";
 
 function DeleteButton(props) {
     const { postId } = props;
