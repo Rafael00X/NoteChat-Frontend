@@ -1,28 +1,13 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useMutation } from "@apollo/client";
 
-import { CREATE_CONVERSATION } from "../../util/graphql";
+import ProfileCard from "../ProfileCard";
 
-function AddConv(props) {
-    const { userId, conv } = props;
+function FindUser(props) {
+    const { userId, callback } = props;
     const [text, setText] = useState("");
+    const [user, setUser] = useState();
     const userIds = [userId];
-    const { conversations, setConversations } = conv;
-
-    const [createConv] = useMutation(CREATE_CONVERSATION, {
-        update(cache, result) {
-            const newConversations = conversations.filter(() => true);
-            newConversations.push(result.data.createConversation.id);
-            setConversations(newConversations);
-        },
-        onError(err) {
-            console.log(err);
-        },
-        variables: {
-            userIds: userIds
-        }
-    });
 
     function onChange(event) {
         setText(event.target.value);
@@ -32,9 +17,13 @@ function AddConv(props) {
         event.preventDefault();
         if (text.trim() !== "") {
             userIds.push(text);
-            createConv();
+            setUser(text);
         }
         setText("");
+    }
+
+    function closeCardCallback() {
+        setUser();
     }
 
     return (
@@ -51,11 +40,14 @@ function AddConv(props) {
                 />
 
                 <Button type="submit" disabled={text.trim() === ""}>
-                    Add
+                    Search
                 </Button>
             </Form>
+            {user && (
+                <ProfileCard userId={user} callback={callback} closeCallback={closeCardCallback} />
+            )}
         </div>
     );
 }
 
-export default AddConv;
+export default FindUser;

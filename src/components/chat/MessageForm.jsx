@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { IoMdSend } from "react-icons/io";
 
-import { CREATE_MESSAGE, GET_CONVERSATION } from "../../util/graphql";
+import { CREATE_MESSAGE } from "../../util/graphql";
 import { useSocketContext } from "../../context/socketProvider";
 
 function CommentForm(props) {
@@ -13,29 +13,19 @@ function CommentForm(props) {
 
     const [createMessage] = useMutation(CREATE_MESSAGE, {
         update(cache, result) {
-            sendMessage(id, recipientId, result.data.createMessage);
-
-            const data = cache.readQuery({
-                query: GET_CONVERSATION,
-                variables: { conversationId: id }
+            socket.emit("send-message", {
+                conversationId: id,
+                recipient: recipientId,
+                message: result.data.createMessage
             });
-
-            cache.writeQuery({
-                query: GET_CONVERSATION,
-                variables: { conversationId: id },
-                data: {
-                    getConversation: {
-                        ...data.getConversation,
-                        messages: [...data.getConversation.messages, result.data.createMessage]
-                    }
-                }
-            });
+            //sendMessage(id, recipientId, result.data.createMessage);
         },
         onError(err) {
             console.log(err);
         },
         variables: {
             conversationId: id,
+            recipientId,
             body: text
         }
     });
@@ -52,9 +42,11 @@ function CommentForm(props) {
         setText("");
     }
 
+    /*
     function sendMessage(conversationId, recipient, message) {
         socket.emit("send-message", { conversationId, recipient, message });
     }
+    */
 
     return (
         <div className="message-form">

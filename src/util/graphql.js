@@ -162,8 +162,8 @@ const CREATE_CONVERSATION = gql`
 `;
 
 const CREATE_MESSAGE = gql`
-    mutation CreateMessage($conversationId: ID!, $body: String!) {
-        createMessage(conversationId: $conversationId, body: $body) {
+    mutation CreateMessage($conversationId: ID, $recipientId: ID!, $body: String!) {
+        createMessage(conversationId: $conversationId, recipientId: $recipientId, body: $body) {
             id
             userId
             body
@@ -183,6 +183,15 @@ const DELETE_MESSAGE = gql`
     }
 `;
 
+const GET_PROFILE = gql`
+    query GetProfile($userId: ID!) {
+        getProfile(userId: $userId) {
+            userId
+            username
+        }
+    }
+`;
+
 export {
     GET_POSTS,
     CREATE_POST,
@@ -195,5 +204,6 @@ export {
     GET_CONVERSATION,
     CREATE_CONVERSATION,
     CREATE_MESSAGE,
-    DELETE_MESSAGE
+    DELETE_MESSAGE,
+    GET_PROFILE
 };

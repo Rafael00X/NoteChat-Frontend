@@ -4,38 +4,24 @@ import { IoMdSend } from "react-icons/io";
 
 function Menu(props) {
     const { conv, def } = props;
-    const [mode, setMode] = useState("");
+    const [active, setActive] = useState(false);
     const [component, setComponent] = useState();
 
-    function handleClick(newMode) {
-        console.log(newMode);
-        if (mode === newMode) {
-            setMode("");
+    function handleClick() {
+        if (active) {
+            setActive(false);
             setComponent();
             conv.setConversations(def);
         } else {
-            switch (newMode) {
-                case "Add":
-                    setMode(newMode);
-                    setComponent(<AddConversation />);
-                    break;
-                case "Search":
-                    setMode(newMode);
-                    setComponent(<FindConversation conv={conv} />);
-                    break;
-                default:
-                    setMode("");
-                    setComponent();
-                    conv.setConversations(def);
-            }
+            setActive(true);
+            setComponent(<FindConversation conv={conv} />);
         }
     }
 
     return (
         <div>
             <div>
-                <Button onClick={() => handleClick("Add")}>Add</Button>
-                <Button onClick={() => handleClick("Search")}>Search</Button>
+                <Button onClick={() => handleClick()}>Search</Button>
             </div>
             {component}
         </div>
@@ -62,35 +48,6 @@ function FindConversation(props) {
             value={text}
             onChange={onChange}
         />
-    );
-}
-
-function AddConversation() {
-    const [text, setText] = useState("");
-
-    function onSubmit() {
-        // TODO
-    }
-
-    function onChange(event) {
-        setText(event.target.value);
-    }
-
-    return (
-        <Form onSubmit={onSubmit}>
-            <Form.Control
-                as="textarea"
-                rows={1}
-                placeholder="Enter user ID to search..."
-                name="body"
-                value={text}
-                onChange={onChange}
-            />
-
-            <Button type="submit" disabled={text.trim() === ""}>
-                <IoMdSend />
-            </Button>
-        </Form>
     );
 }
 
