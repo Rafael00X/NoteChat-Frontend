@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { FaSearch } from "react-icons/fa";
 
 import ProfileCard from "../ProfileCard";
 
@@ -25,24 +25,24 @@ function FindUser(props) {
     function closeCardCallback() {
         setUser();
     }
-
     return (
-        <div className="add-conv-form">
-            <Form onSubmit={onSubmit}>
-                <Form.Control
-                    as="textarea"
-                    rows={1}
-                    id="new-conv-body"
-                    placeholder="Type an id..."
-                    name="body"
-                    value={text}
-                    onChange={onChange}
-                />
-
-                <Button type="submit" disabled={text.trim() === ""}>
-                    Search
-                </Button>
-            </Form>
+        <div>
+            <div className="wrapper">
+                <form onSubmit={onSubmit}>
+                    <div className="search">
+                        <input
+                            id="search"
+                            value={text}
+                            placeholder="Search by ID..."
+                            onChange={onChange}
+                            autoComplete="off"
+                        />
+                        <button type="submit" disabled={text.trim() === ""}>
+                            <FaSearch />
+                        </button>
+                    </div>
+                </form>
+            </div>
             {user && (
                 <ProfileCard userId={user} callback={callback} closeCallback={closeCardCallback} />
             )}

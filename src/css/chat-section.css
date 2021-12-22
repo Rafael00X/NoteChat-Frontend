@@ -5,7 +5,7 @@
 
 .contact-list {
     float: left;
-    width: 400px;
+    width: 450px;
 }
 
 .conversation-card {
@@ -32,6 +32,7 @@
 }
 
 .inbox {
+    float: right;
     margin-left: 5px;
     width: 400px;
     height: 100%;

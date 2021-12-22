@@ -5,6 +5,7 @@ import ConversationCard from "./ConversationCard";
 import Inbox from "./Inbox";
 import Menu from "./Menu";
 import FindUser from "./FindUser";
+import FindConversation from "./FindConversation";
 import { GET_CONVERSATION } from "../../util/graphql";
 import { useSocketContext } from "../../context/socketProvider";
 
@@ -13,7 +14,7 @@ function ChatSection() {
     const [convId, setConvId] = useState(null);
     const [conversations, setConversations] = useState(user.conversations);
     const [recipientId, setRecipientId] = useState(null);
-    const useConversations = { conversations, setConversations };
+    const [searchBox, setSearchBox] = useState(null);
 
     const socket = useSocketContext();
     const client = useApolloClient();
@@ -24,6 +25,8 @@ function ChatSection() {
             if (!conversations.find((c) => c === conversationId)) {
                 console.log("New");
                 setConversations([...conversations, conversationId]);
+                user.conversations.push(conversationId);
+                localStorage.setItem("user", JSON.stringify(user));
             } else {
                 console.log(message);
                 const data = client.readQuery({
@@ -64,8 +67,16 @@ function ChatSection() {
     return (
         <div id="chat-section">
             <div className="contact-list">
-                <Menu conv={useConversations} def={user.conversations} />
-                <FindUser userId={user.id} callback={callbackRecipientId} />
+                <Menu searchBox={searchBox} setSearchBox={setSearchBox} />
+                {(searchBox === "User" && (
+                    <FindUser userId={user.id} callback={callbackRecipientId} />
+                )) ||
+                    (searchBox === "Conv" && (
+                        <FindConversation
+                            allConvs={user.conversations}
+                            setConversations={setConversations}
+                        />
+                    ))}
                 {conversations.map((conv) => (
                     <ConversationCard key={conv} id={conv} callback={callbackConvId} />
                 ))}
