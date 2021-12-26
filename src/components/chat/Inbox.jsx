@@ -5,30 +5,34 @@ import MessageForm from "./MessageForm";
 import { GET_CONVERSATION } from "../../util/graphql";
 
 function Inbox(props) {
-    const { convId, userId, recId } = props;
-    let recipientId;
+    console.log(props.details);
+    const {
+        userId,
+        details: { conversationId, recipientId }
+    } = props;
 
-    const { data, loading } = useQuery(GET_CONVERSATION, { variables: { conversationId: convId } });
+    const { data, loading } = useQuery(GET_CONVERSATION, {
+        variables: { conversationId: conversationId }
+    });
     if (loading) return null;
-    if (!data) {
-        recipientId = recId;
-    } else {
-        recipientId = data.getConversation.userIds.find((id) => id !== userId);
-    }
 
-    //console.log("convId: " + convId + ", userId: " + userId + ", recipientId: " + recipientId);
+    // <MessageForm id={conversationId} userId={userId} recipientId={recipientId} />
 
     return (
         <div className="inbox">
-            {data &&
-                data.getConversation.messages.map((message) => (
-                    <div
-                        key={message.id}
-                        className={userId === message.userId ? "message-sent" : "message-received"}>
-                        <p>{message.body}</p>
-                    </div>
-                ))}
-            <MessageForm id={convId} userId={userId} recipientId={recipientId} />
+            <div className="message-container">
+                {data &&
+                    data.getConversation.messages.map((message) => (
+                        <div
+                            key={message.id}
+                            className={
+                                "message" + (userId === message.userId ? " sent" : " received")
+                            }>
+                            <p>{message.body}</p>
+                        </div>
+                    ))}
+            </div>
+            <MessageForm id={conversationId} userId={userId} recipientId={recipientId} />
         </div>
     );
 }

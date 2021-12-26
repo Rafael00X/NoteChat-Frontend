@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 
-import ProfileCard from "../ProfileCard";
+import ProfileCard from "./ProfileCard";
 
 function FindUser(props) {
     const { userId, callback } = props;

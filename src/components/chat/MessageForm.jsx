@@ -6,7 +6,7 @@ import { IoMdSend } from "react-icons/io";
 import { CREATE_MESSAGE } from "../../util/graphql";
 import { useSocketContext } from "../../context/socketProvider";
 
-function CommentForm(props) {
+function MessageForm(props) {
     const { id, recipientId } = props;
     const [text, setText] = useState("");
     const socket = useSocketContext();
@@ -69,4 +69,4 @@ function CommentForm(props) {
     );
 }
 
-export default CommentForm;
+export default MessageForm;

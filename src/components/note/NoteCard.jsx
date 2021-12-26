@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Card } from "react-bootstrap";
+import Avatar from "react-avatar";
 
 import CommentButton from "./CommentButton";
 import DeleteButton from "./DeleteButton";
@@ -19,10 +20,12 @@ function NoteCard(props) {
     return (
         <Card className="note-card">
             <Card.Body>
-                <img
+                <Avatar
                     className="note-avatar"
-                    alt=""
-                    src="https://react.semantic-ui.com/images/avatar/large/molly.png"
+                    name={post.username}
+                    size="50px"
+                    round="10px"
+                    textSizeRatio={2.0}
                 />
                 <div className="note-header">
                     <h5 role="button">{post.username}</h5>

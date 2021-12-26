@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { Button } from "react-bootstrap";
 
-import { GET_PROFILE } from "../util/graphql";
+import { GET_PROFILE } from "../../util/graphql";
 
 function ProfileCard(props) {
     const { userId, callback, closeCallback } = props;

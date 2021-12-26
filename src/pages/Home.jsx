@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaPowerOff, FaUser } from "react-icons/fa";
+import Avatar from "react-avatar";
 
 import NoteSection from "../components/note/NoteSection";
 import ChatSection from "../components/chat/ChatSection";
+import ProfileView from "../components/ProfileView";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { AuthContext } from "../context/authorization";
 import { SocketProvider } from "../context/socketProvider";
@@ -35,6 +37,8 @@ function Home() {
                 setActiveItem(name);
                 break;
             case "profile":
+                setComponent(<ProfileView userId={user.id} />);
+                setActiveItem(name);
                 break;
             case "logout":
                 setShow(true);
@@ -73,15 +77,12 @@ function Home() {
                             <NavDropdown
                                 align={{ lg: "end" }}
                                 title={
-                                    <img
-                                        className="comment-avatar"
-                                        alt=""
-                                        src="https://react.semantic-ui.com/images/avatar/large/molly.png"
-                                        style={{
-                                            borderRadius: "50%",
-                                            width: "30px",
-                                            height: "30px"
-                                        }}
+                                    <Avatar
+                                        className="profile-avatar"
+                                        name={user.username}
+                                        size="30px"
+                                        round={true}
+                                        textSizeRatio={1.75}
                                     />
                                 }>
                                 <NavDropdown.Item name="profile" onClick={handleItemClick}>

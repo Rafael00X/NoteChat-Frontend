@@ -11,9 +11,8 @@ import { useSocketContext } from "../../context/socketProvider";
 
 function ChatSection() {
     const user = JSON.parse(localStorage.getItem("user"));
-    const [convId, setConvId] = useState(null);
     const [conversations, setConversations] = useState(user.conversations);
-    const [recipientId, setRecipientId] = useState(null);
+    const [inboxDetails, setInboxDetails] = useState(null);
     const [searchBox, setSearchBox] = useState(null);
 
     const socket = useSocketContext();
@@ -48,20 +47,14 @@ function ChatSection() {
         return () => socket.off("receive-message");
     }, [socket, client]);
 
-    console.log(conversations);
-
-    function callbackConvId(id) {
-        setConvId(id);
-        setRecipientId(null);
-    }
-
-    function callbackRecipientId(id) {
-        if (user.id < id) {
-            setConvId(user.id + id);
+    function callbackGetRecipient(recipientId) {
+        if (recipientId == null) {
+            setInboxDetails(null);
         } else {
-            setConvId(id + user.id);
+            const conversationId =
+                user.id < recipientId ? user.id + recipientId : recipientId + user.id;
+            setInboxDetails({ conversationId, recipientId });
         }
-        setRecipientId(id);
     }
 
     return (
@@ -69,7 +62,7 @@ function ChatSection() {
             <div className="contact-list">
                 <Menu searchBox={searchBox} setSearchBox={setSearchBox} />
                 {(searchBox === "User" && (
-                    <FindUser userId={user.id} callback={callbackRecipientId} />
+                    <FindUser userId={user.id} callback={callbackGetRecipient} />
                 )) ||
                     (searchBox === "Conv" && (
                         <FindConversation
@@ -77,13 +70,18 @@ function ChatSection() {
                             setConversations={setConversations}
                         />
                     ))}
-                {conversations.map((conv) => (
-                    <ConversationCard key={conv} id={conv} callback={callbackConvId} />
-                ))}
+                <div className="conversation-list">
+                    {conversations.map((conv) => (
+                        <ConversationCard
+                            key={conv}
+                            id={conv}
+                            userId={user.id}
+                            callback={callbackGetRecipient}
+                        />
+                    ))}
+                </div>
             </div>
-            {(convId || recipientId) && (
-                <Inbox convId={convId} userId={user.id} recId={recipientId} />
-            )}
+            {inboxDetails && <Inbox userId={user.id} details={inboxDetails} />}
         </div>
     );
 }

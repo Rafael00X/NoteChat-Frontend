@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import Avatar from "react-avatar";
 
 import { AuthContext } from "../../context/authorization";
 import ConfirmDialog from "../ConfirmDialog";
@@ -23,10 +24,12 @@ function Comment(props) {
     return (
         <>
             <div className="comment">
-                <img
+                <Avatar
                     className="comment-avatar"
-                    alt=""
-                    src="https://react.semantic-ui.com/images/avatar/large/molly.png"
+                    name={comment.username}
+                    size="40px"
+                    round="10px"
+                    textSizeRatio={2.0}
                 />
                 <div className="comment-body">
                     <span>

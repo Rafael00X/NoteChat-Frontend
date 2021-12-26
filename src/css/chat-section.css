@@ -1,11 +1,19 @@
 #chat-section {
     height: 100%;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .contact-list {
-    float: left;
+    display: inline-block;
+    margin-left: 0;
     width: 450px;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.conversation-list {
+    height: 90%;
 }
 
 .conversation-card {
@@ -29,24 +37,41 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: bold;
 }
 
 .inbox {
-    float: right;
-    margin-left: 5px;
-    width: 400px;
+    display: inline-block;
+    margin-right: auto;
+    width: calc(100% - 450px);
     height: 100%;
+    overflow-y: hidden;
+}
+
+.inbox .message-container {
+    padding: 0;
+    height: 90%;
+    width: 100%;
     overflow: scroll;
 }
 
-.inbox .message-sent {
-    background-color: teal;
-    float: right;
+.inbox .message {
+    margin: 5px;
+    padding: 5px 10px;
     width: 250px;
+    border-radius: 10px;
 }
 
-.inbox .message-received {
+.inbox .message.sent {
+    background-color: teal;
+    margin-left: auto;
+}
+
+.inbox .message.received {
     background-color: wheat;
-    float: left;
-    width: 250px;
+    margin-right: auto;
+}
+
+.inbox .message-form {
+    margin-top: auto;
 }

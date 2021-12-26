@@ -1,5 +1,6 @@
 .wrapper {
-    max-width: 100%;
+    max-width: 95%;
+    margin-left: 5px;
     padding: 0 1.5em;
     background: white;
     border: 1px solid lightgray;
@@ -12,7 +13,7 @@
 }
 .search {
     display: flex;
-    height: 3em;
+    height: 2rem;
     align-items: center;
 }
 .search input {
