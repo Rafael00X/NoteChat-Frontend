@@ -17,27 +17,41 @@
 }
 
 .conversation-card {
-    padding: 15px;
+    display: flex;
+    justify-content: flex-start;
+    height: 80px;
+    padding: 5px;
+    border-bottom: 2px solid whitesmoke;
+    background-color: white;
 }
-
+/*
 .conversation-card .avatar {
     border-radius: 50px;
     height: 25px;
     width: 25px;
-}
+}*/
 
 .conversation-card .body {
     display: inline-block;
-    margin-left: 20px;
+    height: 70px;
+    padding: 10px 0;
 }
 
 .conversation-card .body .name {
-    display: block;
+    display: inline-block;
     width: 280px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     font-weight: bold;
+}
+
+.conversation-card .body .last-message {
+    display: block;
+    max-width: 25ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .inbox {
@@ -50,28 +64,76 @@
 
 .inbox .message-container {
     padding: 0;
-    height: 90%;
+    height: calc(100% - 160px);
     width: 100%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .inbox .message {
-    margin: 5px;
+    display: inline-block;
+    margin: 5px 20px 5px 20px;
+    max-width: 300px;
     padding: 5px 10px;
-    width: 250px;
     border-radius: 10px;
 }
 
-.inbox .message.sent {
-    background-color: teal;
+.inbox .message.right {
+    background-color: #0d6efd;
     margin-left: auto;
+    color: white;
 }
 
-.inbox .message.received {
-    background-color: wheat;
+.inbox .message.left {
+    background-color: #ffffff;
     margin-right: auto;
 }
-
+/*
 .inbox .message-form {
+    background-color: whitesmoke;
+    padding: 10px;
     margin-top: auto;
+    height: 60px;
+}
+*/
+.inbox .message-form textarea {
+    display: inline-block;
+    width: calc(100% - 60px);
+}
+
+.inbox .message-form button {
+    display: inline-block;
+}
+
+.inbox-header {
+    background-color: whitesmoke;
+    border: 1px solid gainsboro;
+    height: 70px;
+    width: 100%;
+}
+
+.inbox-header button.transparent {
+    display: inline-block;
+    margin-left: auto;
+    width: 50px;
+}
+
+.inbox-header .header-avatar {
+}
+
+.inbox-header .name {
+    display: inline-block;
+    font-weight: bold;
+    width: calc(100% - 140px);
+    text-overflow: ellipsis;
+}
+
+.inbox .message-container .message-body {
+    margin: 0;
+    text-align: left;
+}
+
+.inbox .message-container .message-time {
+    font-size: 0.7rem;
+    margin: 0;
+    text-align: right;
 }

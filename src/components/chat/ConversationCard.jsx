@@ -33,7 +33,13 @@ function ConversationCard(props) {
 
     return (
         <div className="conversation-card" onClick={handleClick}>
-            <Avatar name={name} size="60px" round="25px" textSizeRatio={2.0} />
+            <Avatar
+                name={name}
+                size="40px"
+                round="25px"
+                textSizeRatio={2.0}
+                style={{ display: "inline-block", margin: "15px" }}
+            />
             <div className="body">
                 <span className="name">{name}</span>
                 <span className="last-message">{lastMessage}</span>

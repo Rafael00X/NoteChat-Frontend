@@ -1,0 +1,33 @@
+.message-form {
+    background-color: whitesmoke;
+    padding: 10px;
+    margin-top: auto;
+    height: 90px;
+}
+
+.message-form .cover {
+    max-width: 100%;
+    padding: 0 0.5em 0 1.5em;
+    background: white;
+    border: 1px solid lightgray;
+    border-radius: 1.5em;
+    overflow: hidden;
+}
+
+.message-form .search {
+    align-items: center;
+}
+.message-form .search textarea {
+    width: calc(100% - 60px);
+    border: 0;
+    margin-right: 20px;
+}
+.message-form .search button {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}

@@ -1,0 +1,27 @@
+#contacts .contacts-header {
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+    height: 70px;
+}
+
+#contacts .button-container {
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+    border-width: 0 1px;
+    height: 40px;
+}
+
+#contacts .button-container button {
+    border: none;
+    height: 100%;
+    width: 50%;
+}
+
+#contacts .searchbar {
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+    border-top: none;
+    height: 55px;
+    padding-top: 10px;
+    width: 100%;
+}

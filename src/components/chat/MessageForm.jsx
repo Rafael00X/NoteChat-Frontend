@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
 import { IoMdSend } from "react-icons/io";
 
@@ -10,6 +9,8 @@ function MessageForm(props) {
     const { id, recipientId } = props;
     const [text, setText] = useState("");
     const socket = useSocketContext();
+
+    const [size, setSize] = useState(26);
 
     const [createMessage] = useMutation(CREATE_MESSAGE, {
         update(cache, result) {
@@ -30,8 +31,40 @@ function MessageForm(props) {
         }
     });
 
-    function onChange(event) {
-        setText(event.target.value);
+    function onChange({ target }) {
+        setText(target.value);
+
+        const minRows = target.getAttribute("minrows"),
+            maxRows = target.getAttribute("maxrows"),
+            rowSize = 24;
+
+        target.rows = minRows;
+        let currRows = target.scrollHeight / rowSize;
+        if (currRows < minRows) currRows = minRows;
+        else if (currRows > maxRows) currRows = maxRows;
+        target.rows = currRows;
+        setSize(target.offsetHeight);
+
+        /*
+
+        if (!target._baseScrollHeight) {
+            target.value = "";
+            target._baseScrollHeight = target.scrollHeight;
+            target.value = text;
+        }
+
+        const minRows = target.getAttribute("minrows"),
+            maxRows = target.getAttribute("maxrows"),
+            rowSize = 24;
+
+        target.rows = minRows;
+        let currRows = (target.scrollHeight - target._baseScrollHeight) / rowSize + 1;
+        if (currRows < minRows) currRows = minRows;
+        else if (currRows > maxRows) currRows = maxRows;
+        target.rows = currRows;
+        setSize(target.scrollHeight);
+        console.log([target.scrollHeight, currRows, target._baseScrollHeight, target.scrollHeight]);
+        */
     }
 
     function onSubmit(event) {
@@ -42,12 +75,32 @@ function MessageForm(props) {
         setText("");
     }
 
-    /*
-    function sendMessage(conversationId, recipient, message) {
-        socket.emit("send-message", { conversationId, recipient, message });
-    }
-    */
+    return (
+        <div className="message-form">
+            <div
+                className="cover"
+                style={{ display: "block", height: size + "px", marginBottom: "auto" }}>
+                <form onSubmit={onSubmit}>
+                    <div className="search" style={{ height: size + "px" }}>
+                        <textarea
+                            rows="1"
+                            minrows="1"
+                            maxrows="3"
+                            value={text}
+                            placeholder="Type a message"
+                            onChange={onChange}
+                            style={{ overflowY: "scroll" }}
+                        />
+                        <button type="submit" disabled={text.trim() === ""}>
+                            <IoMdSend />
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
 
+    /*
     return (
         <div className="message-form">
             <Form onSubmit={onSubmit}>
@@ -67,6 +120,7 @@ function MessageForm(props) {
             </Form>
         </div>
     );
+    */
 }
 
 export default MessageForm;

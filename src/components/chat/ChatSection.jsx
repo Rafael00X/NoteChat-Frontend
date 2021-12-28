@@ -8,6 +8,7 @@ import FindUser from "./FindUser";
 import FindConversation from "./FindConversation";
 import { GET_CONVERSATION } from "../../util/graphql";
 import { useSocketContext } from "../../context/socketProvider";
+import Contacts from "./Contacts";
 
 function ChatSection() {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -60,6 +61,23 @@ function ChatSection() {
     return (
         <div id="chat-section">
             <div className="contact-list">
+                <Contacts
+                    allConversations={user.conversations}
+                    userId={user.id}
+                    callbackGetRecipient={callbackGetRecipient}
+                />
+            </div>
+            {inboxDetails && (
+                <Inbox userId={user.id} details={inboxDetails} setDetails={setInboxDetails} />
+            )}
+        </div>
+    );
+
+    /*
+
+    return (
+        <div id="chat-section">
+            <div className="contact-list">
                 <Menu searchBox={searchBox} setSearchBox={setSearchBox} />
                 {(searchBox === "User" && (
                     <FindUser userId={user.id} callback={callbackGetRecipient} />
@@ -81,9 +99,12 @@ function ChatSection() {
                     ))}
                 </div>
             </div>
-            {inboxDetails && <Inbox userId={user.id} details={inboxDetails} />}
+            {inboxDetails && (
+                <Inbox userId={user.id} details={inboxDetails} setDetails={setInboxDetails} />
+            )}
         </div>
     );
+    */
 }
 
 export default ChatSection;
