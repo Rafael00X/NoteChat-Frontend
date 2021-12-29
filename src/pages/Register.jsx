@@ -21,8 +21,9 @@ function Register(props) {
     // Using graphql query
     const [registerUser, { loading }] = useMutation(REGISTER_USER, {
         // Query successful
-        update(_, result) {
-            context.login(result.data.register);
+        update(_, { data }) {
+            localStorage.setItem("user", JSON.stringify(data.register));
+            context.login(data.register);
             props.history.push("/"); // Takes to home page "/"
         },
         // Query failed

@@ -124,6 +124,8 @@ const REGISTER_USER = gql`
             email
             username
             createdAt
+            conversations
+            posts
             token
         }
     }
@@ -192,6 +194,16 @@ const GET_PROFILE = gql`
     }
 `;
 
+const GET_CONVERSATIONS = gql`
+    query GetConversations($conversationIds: [ID]) {
+        getConversations(conversationIds: $conversationIds) {
+            conversationId
+            userId
+            username
+        }
+    }
+`;
+
 export {
     GET_POSTS,
     CREATE_POST,
@@ -205,5 +217,6 @@ export {
     CREATE_CONVERSATION,
     CREATE_MESSAGE,
     DELETE_MESSAGE,
-    GET_PROFILE
+    GET_PROFILE,
+    GET_CONVERSATIONS
 };

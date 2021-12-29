@@ -6,7 +6,7 @@ import { CREATE_MESSAGE } from "../../util/graphql";
 import { useSocketContext } from "../../context/socketProvider";
 
 function MessageForm(props) {
-    const { id, recipientId } = props;
+    const { id, userId, username, recipientId } = props;
     const [text, setText] = useState("");
     const socket = useSocketContext();
 
@@ -17,6 +17,8 @@ function MessageForm(props) {
             socket.emit("send-message", {
                 conversationId: id,
                 recipient: recipientId,
+                senderId: userId,
+                senderName: username,
                 message: result.data.createMessage
             });
             //sendMessage(id, recipientId, result.data.createMessage);

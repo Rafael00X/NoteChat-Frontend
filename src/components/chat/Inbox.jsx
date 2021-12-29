@@ -10,6 +10,7 @@ function Inbox(props) {
     console.log(props.details);
     const {
         userId,
+        username,
         details: { conversationId, recipientId },
         setDetails
     } = props;
@@ -23,7 +24,12 @@ function Inbox(props) {
         <div className="inbox">
             <InboxHeader profileData={profileData} handleClose={() => setDetails(null)} />
             <MessageContainer conversationData={conversationData} userId={userId} />
-            <MessageForm id={conversationId} userId={userId} recipientId={recipientId} />
+            <MessageForm
+                id={conversationId}
+                userId={userId}
+                username={username}
+                recipientId={recipientId}
+            />
         </div>
     );
 }

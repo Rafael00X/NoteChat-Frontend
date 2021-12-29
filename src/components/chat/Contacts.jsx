@@ -8,7 +8,6 @@ import ConversationCard from "./ConversationCard";
 
 function Contacts(props) {
     const { allConversations, userId, callbackGetRecipient } = props;
-    const [conversations, setConversations] = useState(allConversations);
     const [active, setActive] = useState(1);
     const [user, setUser] = useState();
     return (
@@ -31,16 +30,6 @@ function Contacts(props) {
 }
 
 export default Contacts;
-
-/*
-<SearchBar
-                active={active}
-                setConversations={setConversations}
-                allConversations={allConversations}
-                userId={userId}
-                setUser={setUser}
-            />
-*/
 
 function ContactsHeader(props) {
     return <div className="contacts-header"></div>;
@@ -65,23 +54,12 @@ function ButtonContainer(props) {
         </div>
     );
 }
-/*
-function SearchBar(props) {
-    const { active, setConversations, allConversations, userId, setUser } = props;
-    return (
-        <div className="searchbar">
-            {active === 1 ? (
-                <FindConversation setConversations={setConversations} allConvs={allConversations} />
-            ) : (
-                <FindUser userId={userId} setUser={setUser} />
-            )}
-        </div>
-    );
-}*/
 
 function Component1(props) {
     const { allConversations, userId, callbackGetRecipient } = props;
     const [conversations, setConversations] = useState(allConversations);
+    console.log(allConversations.map((c) => c.username));
+    console.log(conversations.map((c) => c.username));
 
     return (
         <div className="component1">
@@ -91,8 +69,8 @@ function Component1(props) {
             <div className="conversation-list">
                 {conversations.map((conv) => (
                     <ConversationCard
-                        key={conv}
-                        id={conv}
+                        key={conv.conversationId}
+                        id={conv.conversationId}
                         userId={userId}
                         callback={callbackGetRecipient}
                     />

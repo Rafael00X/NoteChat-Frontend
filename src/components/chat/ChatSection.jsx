@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useApolloClient } from "@apollo/client";
 
-import ConversationCard from "./ConversationCard";
+import Contacts from "./Contacts";
 import Inbox from "./Inbox";
-import Menu from "./Menu";
-import FindUser from "./FindUser";
-import FindConversation from "./FindConversation";
 import { GET_CONVERSATION } from "../../util/graphql";
 import { useSocketContext } from "../../context/socketProvider";
-import Contacts from "./Contacts";
 
-function ChatSection() {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const [conversations, setConversations] = useState(user.conversations);
+function ChatSection(props) {
+    const { convs } = props;
+    const [allConversations, setAllConversations] = useState(convs);
     const [inboxDetails, setInboxDetails] = useState(null);
-    const [searchBox, setSearchBox] = useState(null);
+    const user = JSON.parse(localStorage.getItem("user"));
+    // console.log(conversations);
 
     const socket = useSocketContext();
     const client = useApolloClient();
 
     useEffect(() => {
         if (socket == null) return;
-        socket.on("receive-message", ({ conversationId, message }) => {
-            if (!conversations.find((c) => c === conversationId)) {
+        socket.on("receive-message", ({ conversationId, message, senderId, senderName }) => {
+            if (!allConversations.find((c) => c.conversationId === conversationId)) {
                 console.log("New");
-                setConversations([...conversations, conversationId]);
+                setAllConversations([
+                    { conversationId, userId: senderId, username: senderName },
+                    ...allConversations
+                ]);
                 user.conversations.push(conversationId);
                 localStorage.setItem("user", JSON.stringify(user));
             } else {
@@ -43,6 +43,11 @@ function ChatSection() {
                         }
                     }
                 });
+                setAllConversations(
+                    [allConversations.find((c) => c.conversationId === conversationId)].concat(
+                        allConversations.filter((c) => c.conversationId !== conversationId)
+                    )
+                );
             }
         });
         return () => socket.off("receive-message");
@@ -62,13 +67,18 @@ function ChatSection() {
         <div id="chat-section">
             <div className="contact-list">
                 <Contacts
-                    allConversations={user.conversations}
+                    allConversations={allConversations}
                     userId={user.id}
                     callbackGetRecipient={callbackGetRecipient}
                 />
             </div>
             {inboxDetails && (
-                <Inbox userId={user.id} details={inboxDetails} setDetails={setInboxDetails} />
+                <Inbox
+                    userId={user.id}
+                    username={user.username}
+                    details={inboxDetails}
+                    setDetails={setInboxDetails}
+                />
             )}
         </div>
     );

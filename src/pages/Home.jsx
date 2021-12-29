@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaPowerOff, FaUser } from "react-icons/fa";
+import { useQuery } from "@apollo/client";
 import Avatar from "react-avatar";
 
 import NoteSection from "../components/note/NoteSection";
@@ -9,6 +10,7 @@ import ProfileView from "../components/ProfileView";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { AuthContext } from "../context/authorization";
 import { SocketProvider } from "../context/socketProvider";
+import { GET_CONVERSATIONS } from "../util/graphql";
 
 function Home() {
     const context = useContext(AuthContext);
@@ -16,8 +18,11 @@ function Home() {
     const [component, setComponent] = useState(<NoteSection />);
     const [show, setShow] = useState(false);
 
-    const user = context.user;
-    // console.log(user);
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user);
+    const convData = useQuery(GET_CONVERSATIONS, {
+        variables: { conversationIds: user.conversations }
+    });
 
     function logoutCallback() {
         localStorage.removeItem("user");
@@ -33,7 +38,7 @@ function Home() {
                 setActiveItem(name);
                 break;
             case "chat":
-                setComponent(<ChatSection />);
+                setComponent(<ChatSection convs={convData.data.getConversations} />);
                 setActiveItem(name);
                 break;
             case "profile":
@@ -67,13 +72,15 @@ function Home() {
                             <Nav.Link name="home" eventKey="home" onClick={handleItemClick}>
                                 Home
                             </Nav.Link>
-                            <Nav.Link
-                                className="me-auto"
-                                name="chat"
-                                eventKey="chat"
-                                onClick={handleItemClick}>
-                                Chat
-                            </Nav.Link>
+                            {convData.data && (
+                                <Nav.Link
+                                    className="me-auto"
+                                    name="chat"
+                                    eventKey="chat"
+                                    onClick={handleItemClick}>
+                                    Chat
+                                </Nav.Link>
+                            )}
                             <NavDropdown
                                 align={{ lg: "end" }}
                                 title={

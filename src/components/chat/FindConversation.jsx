@@ -7,7 +7,7 @@ function FindConversation(props) {
     function onChange(event) {
         const v = event.target.value;
         setText(v);
-        const newConversations = allConvs.filter((conv) => conv.startsWith(v));
+        const newConversations = allConvs.filter((conv) => conv.username.startsWith(v));
         setConversations(newConversations);
     }
 
