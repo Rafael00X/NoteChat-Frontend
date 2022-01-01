@@ -50,6 +50,7 @@ function Login(props) {
                 />
                 <Form.Control
                     placeholder="Password"
+                    maxLength="50"
                     name="password"
                     type="password"
                     value={values.password}

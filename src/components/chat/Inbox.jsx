@@ -21,7 +21,7 @@ function Inbox(props) {
     });
 
     return (
-        <div className="inbox">
+        <div id="inbox">
             <InboxHeader profileData={profileData} handleClose={() => setDetails(null)} />
             <MessageContainer conversationData={conversationData} userId={userId} />
             <MessageForm

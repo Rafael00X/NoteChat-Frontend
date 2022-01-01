@@ -58,16 +58,20 @@ function ButtonContainer(props) {
 function Component1(props) {
     const { allConversations, userId, callbackGetRecipient } = props;
     const [conversations, setConversations] = useState(allConversations);
-    console.log(allConversations.map((c) => c.username));
-    console.log(conversations.map((c) => c.username));
+    const [searchMode, setSearchMode] = useState(false);
+    const convs = searchMode ? conversations : allConversations;
 
     return (
         <div className="component1">
             <div className="searchbar">
-                <FindConversation setConversations={setConversations} allConvs={allConversations} />
+                <FindConversation
+                    setConversations={setConversations}
+                    useSearchMode={[searchMode, setSearchMode]}
+                    allConvs={allConversations}
+                />
             </div>
             <div className="conversation-list">
-                {conversations.map((conv) => (
+                {convs.map((conv) => (
                     <ConversationCard
                         key={conv.conversationId}
                         id={conv.conversationId}

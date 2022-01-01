@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { FaPowerOff, FaUser } from "react-icons/fa";
-import { useQuery } from "@apollo/client";
+import { useApolloClient, useQuery } from "@apollo/client";
 import Avatar from "react-avatar";
 
 import NoteSection from "../components/note/NoteSection";
@@ -14,6 +14,7 @@ import { GET_CONVERSATIONS } from "../util/graphql";
 
 function Home() {
     const context = useContext(AuthContext);
+    const client = useApolloClient();
     const [activeItem, setActiveItem] = useState("home");
     const [component, setComponent] = useState(<NoteSection />);
     const [show, setShow] = useState(false);
@@ -26,6 +27,7 @@ function Home() {
 
     function logoutCallback() {
         localStorage.removeItem("user");
+        client.cache.reset();
         context.logout();
     }
 
@@ -38,7 +40,9 @@ function Home() {
                 setActiveItem(name);
                 break;
             case "chat":
-                setComponent(<ChatSection convs={convData.data.getConversations} />);
+                if (convData.data)
+                    setComponent(<ChatSection convs={convData.data.getConversations} />);
+                else setComponent(<h1>Loading conversations...</h1>);
                 setActiveItem(name);
                 break;
             case "profile":
@@ -72,15 +76,13 @@ function Home() {
                             <Nav.Link name="home" eventKey="home" onClick={handleItemClick}>
                                 Home
                             </Nav.Link>
-                            {convData.data && (
-                                <Nav.Link
-                                    className="me-auto"
-                                    name="chat"
-                                    eventKey="chat"
-                                    onClick={handleItemClick}>
-                                    Chat
-                                </Nav.Link>
-                            )}
+                            <Nav.Link
+                                className="me-auto"
+                                name="chat"
+                                eventKey="chat"
+                                onClick={handleItemClick}>
+                                Chat
+                            </Nav.Link>
                             <NavDropdown
                                 align={{ lg: "end" }}
                                 title={

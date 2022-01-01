@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 function FindConversation(props) {
-    const { setConversations, allConvs } = props;
+    const {
+        setConversations,
+        useSearchMode: [searchMode, setSearchMode],
+        allConvs
+    } = props;
     const [text, setText] = useState("");
 
     function onChange(event) {
@@ -9,6 +13,8 @@ function FindConversation(props) {
         setText(v);
         const newConversations = allConvs.filter((conv) => conv.username.startsWith(v));
         setConversations(newConversations);
+        if (v === "") setSearchMode(false);
+        else if (!searchMode) setSearchMode(true);
     }
 
     return (

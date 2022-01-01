@@ -49,6 +49,7 @@ function Register(props) {
                 <h3>Register</h3>
                 <Form.Control
                     placeholder="Name"
+                    maxLength="50"
                     name="username"
                     type="text"
                     value={values.username}
@@ -56,6 +57,7 @@ function Register(props) {
                 />
                 <Form.Control
                     placeholder="Email"
+                    maxLength="320"
                     name="email"
                     type="email"
                     value={values.email}
@@ -63,6 +65,7 @@ function Register(props) {
                 />
                 <Form.Control
                     placeholder="Password"
+                    maxLength="50"
                     name="password"
                     type="password"
                     value={values.password}
@@ -70,6 +73,7 @@ function Register(props) {
                 />
                 <Form.Control
                     placeholder="Confirm password"
+                    maxLength="50"
                     name="confirmPassword"
                     type="password"
                     value={values.confirmPassword}

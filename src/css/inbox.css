@@ -1,5 +1,79 @@
+#inbox {
+    --light-color: white;
+    --mid-color: #f9f8fa;
+    --dark-color: #ededed;
+    --border-color: lightgray;
+}
+
+#inbox {
+    display: inline-block;
+    margin-right: auto;
+    width: calc(100% - 450px);
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.inbox-header {
+    background-color: var(--dark-color);
+    border-bottom: 1px solid var(--border-color);
+    height: 70px;
+    width: 100%;
+}
+
+.inbox-header button.transparent {
+    display: inline-block;
+    margin-left: auto;
+    width: 50px;
+}
+
+.inbox-header .name {
+    display: inline-block;
+    font-weight: bold;
+    width: calc(100% - 140px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.message-container {
+    padding: 0;
+    height: calc(100% - 160px);
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.message-container .message {
+    display: inline-block;
+    margin: 5px 20px 5px 20px;
+    max-width: 300px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+
+.message-container .message-body {
+    margin: 0;
+    text-align: left;
+}
+
+.message-container .message-time {
+    font-size: 0.7rem;
+    margin: 0;
+    text-align: right;
+}
+
+.message-container .message.right {
+    background-color: #0d6efd;
+    margin-left: auto;
+    color: white;
+}
+
+.message-container .message.left {
+    background-color: white;
+    margin-right: auto;
+}
+
 .message-form {
-    background-color: whitesmoke;
+    background-color: var(--dark-color);
     padding: 10px;
     margin-top: auto;
     height: 90px;
@@ -30,4 +104,13 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+
+.message-form textarea {
+    display: inline-block;
+    width: calc(100% - 60px);
+}
+
+.message-form button {
+    display: inline-block;
 }

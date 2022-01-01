@@ -1,27 +1,56 @@
+#contacts {
+    --light: white;
+    --mid: #f9f8fa;
+    --dark: #ededed;
+    --border-color: lightgray;
+}
+
+#contacts {
+    display: inline-block;
+    margin-left: 0;
+    width: 450px;
+    height: 100%;
+    overflow-y: hidden;
+    border-right: 1px solid var(--border-color);
+}
+
 #contacts .contacts-header {
-    background-color: whitesmoke;
-    border: 1px solid lightgray;
+    background-color: var(--dark);
+    border-bottom: 1px solid var(--border-color);
     height: 70px;
 }
 
 #contacts .button-container {
-    background-color: whitesmoke;
-    border: 1px solid lightgray;
-    border-width: 0 1px;
+    background-color: var(--dark);
     height: 40px;
 }
 
 #contacts .button-container button {
+    background-color: gray;
     border: none;
     height: 100%;
     width: 50%;
 }
 
+#contacts .button-container button.active {
+    background-color: var(--dark);
+}
+
 #contacts .searchbar {
-    background-color: whitesmoke;
-    border: 1px solid lightgray;
-    border-top: none;
+    background-color: var(--dark);
+    border-bottom: 1px solid var(--border-color);
     height: 55px;
     padding-top: 10px;
     width: 100%;
+}
+
+#contacts .component1,
+#contacts .component2 {
+    background-color: var(--mid);
+    height: calc(100% - 110px);
+}
+
+#contacts .conversation-list {
+    height: calc(100% - 55px);
+    overflow-y: auto;
 }
