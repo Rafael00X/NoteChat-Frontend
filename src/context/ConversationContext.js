@@ -32,29 +32,41 @@ function reducer(state, action) {
     }
 }
 
-const ConversationContext = React.createContext();
+const ConversationContext = React.createContext({
+    data: [],
+    addConversation: () => {},
+    addMessage: () => {}
+});
 const useConversationContext = () => useContext(ConversationContext);
 
 function ConversationProvider({ children }) {
-    console.log("Conversation context rendered");
+    console.log("# ConversationContext rendered #");
     const userContext = useUserContext();
     const [conversations, dispatch] = useReducer(reducer, []);
-    console.log(conversations);
 
-    const conversationIds = userContext ? userContext.conversations : null;
+    const conversationIds = userContext.conversations;
     const { data } = useQuery(FETCH_CONVERSATIONS, {
-        skip: conversationIds === null,
+        fetchPolicy: "no-cache",
+        skip: conversationIds === null || conversationIds === undefined,
         variables: { conversationIds }
     });
     useEffect(() => {
         console.log("Conversation data: ");
         console.log(data);
-        if (data !== undefined && data !== null)
+        if (data !== undefined && data !== null && data.length !== 0)
             dispatch({ type: SET, value: data.fetchConversations });
     }, [data]);
 
+    function addMessage(conversationId, message) {
+        dispatch({ type: ADD_MESSAGE, value: { conversationId, message } });
+    }
+
+    function addConversation(conversation, profile) {
+        dispatch({ type: ADD_CONVERSATION, value: { conversation, profile } });
+    }
+
     return (
-        <ConversationContext.Provider value={{ conversations, dispatch }}>
+        <ConversationContext.Provider value={{ data: conversations, addConversation, addMessage }}>
             {children}
         </ConversationContext.Provider>
     );

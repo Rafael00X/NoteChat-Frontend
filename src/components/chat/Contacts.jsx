@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { RiMessage3Fill, RiUserAddFill } from "react-icons/ri";
 
 import FindUser from "./FindUser";
 import FindConversation from "./FindConversation";
@@ -39,59 +40,31 @@ function ButtonContainer(props) {
             <button
                 onClick={() => setActive(1)}
                 style={{ backgroundColor: active === 1 ? "whitesmoke" : "grey" }}>
-                Conv
+                <RiMessage3Fill />
+                &nbsp;&nbsp;Conversations
             </button>
             <button
                 onClick={() => setActive(2)}
                 style={{ backgroundColor: active === 2 ? "whitesmoke" : "grey" }}>
-                User
+                <RiUserAddFill />
+                &nbsp;&nbsp;New Contact
             </button>
         </div>
     );
 }
-/*
-function Component1(props) {
-    const { allConversations, userId, callbackGetRecipient } = props;
-    const [conversations, setConversations] = useState(allConversations);
-    const [searchMode, setSearchMode] = useState(false);
-    const convs = searchMode ? conversations : allConversations;
 
-    return (
-        <div className="component1">
-            <div className="searchbar">
-                <FindConversation
-                    setConversations={setConversations}
-                    useSearchMode={[searchMode, setSearchMode]}
-                    allConvs={allConversations}
-                />
-            </div>
-            <div className="conversation-list">
-                {convs.map((conv) => (
-                    <ConversationCard
-                        key={conv.conversationId}
-                        id={conv.conversationId}
-                        userId={userId}
-                        callback={callbackGetRecipient}
-                    />
-                ))}
-            </div>
-        </div>
-    );
-}
-*/
 function Component1(props) {
     const { callbackGetRecipient } = props;
     const conversationContext = useConversationContext();
     const [conversations, setConversations] = useState([]);
+    const [searchMode, setSearchMode] = useState(false);
+    const allConversations = conversationContext.data;
 
-    const allConversations = conversationContext.conversations;
+    const convs = searchMode ? conversations : allConversations;
 
     useEffect(() => {
-        setConversations(allConversations);
+        if (!searchMode) setConversations(allConversations);
     }, [allConversations]);
-
-    const [searchMode, setSearchMode] = useState(false);
-    const convs = searchMode ? conversations : allConversations;
 
     return (
         <div className="component1">
