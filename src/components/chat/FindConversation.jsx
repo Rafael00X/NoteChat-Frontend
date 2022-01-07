@@ -11,7 +11,7 @@ function FindConversation(props) {
     function onChange(event) {
         const v = event.target.value;
         setText(v);
-        const newConversations = allConvs.filter((conv) => conv.username.startsWith(v));
+        const newConversations = allConvs.filter((conv) => conv.profile.username.startsWith(v));
         setConversations(newConversations);
         if (v === "") setSearchMode(false);
         else if (!searchMode) setSearchMode(true);

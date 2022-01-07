@@ -3,7 +3,6 @@ import { useApolloClient } from "@apollo/client";
 
 import Contacts from "./Contacts";
 import Inbox from "./Inbox";
-import { GET_CONVERSATION } from "../../util/graphql";
 import { useSocketContext } from "../../context/socketProvider";
 
 function ChatSection(props) {
@@ -11,38 +10,20 @@ function ChatSection(props) {
     const [allConversations, setAllConversations] = useState(convs);
     const [inboxDetails, setInboxDetails] = useState(null);
     const user = JSON.parse(localStorage.getItem("user"));
-    // console.log(conversations);
+    console.log("Rendered ChatSection");
+    console.log(convs.length);
 
     const socket = useSocketContext();
     const client = useApolloClient();
 
     useEffect(() => {
+        setAllConversations(convs);
+    }, [convs]);
+
+    useEffect(() => {
         if (socket == null) return;
         socket.on("receive-message", ({ conversationId, message, senderId, senderName }) => {
-            if (!allConversations.find((c) => c.conversationId === conversationId)) {
-                console.log("New");
-                setAllConversations([
-                    { conversationId, userId: senderId, username: senderName },
-                    ...allConversations
-                ]);
-                user.conversations.push(conversationId);
-                localStorage.setItem("user", JSON.stringify(user));
-            } else {
-                console.log(message);
-                const data = client.readQuery({
-                    query: GET_CONVERSATION,
-                    variables: { conversationId }
-                });
-                client.writeQuery({
-                    query: GET_CONVERSATION,
-                    variables: { conversationId },
-                    data: {
-                        getConversation: {
-                            ...data.getConversation,
-                            messages: [...data.getConversation.messages, message]
-                        }
-                    }
-                });
+            if (allConversations.find((c) => c.conversationId === conversationId)) {
                 setAllConversations(
                     [allConversations.find((c) => c.conversationId === conversationId)].concat(
                         allConversations.filter((c) => c.conversationId !== conversationId)
@@ -66,11 +47,7 @@ function ChatSection(props) {
     return (
         <div id="chat-section">
             <div className="contact-list">
-                <Contacts
-                    allConversations={allConversations}
-                    userId={user.id}
-                    callbackGetRecipient={callbackGetRecipient}
-                />
+                <Contacts userId={user.id} callbackGetRecipient={callbackGetRecipient} />
             </div>
             {inboxDetails && (
                 <Inbox

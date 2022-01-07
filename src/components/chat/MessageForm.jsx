@@ -14,13 +14,21 @@ function MessageForm(props) {
 
     const [createMessage] = useMutation(CREATE_MESSAGE, {
         update(cache, result) {
-            socket.emit("send-message", {
-                conversationId: id,
-                recipient: recipientId,
-                senderId: userId,
-                senderName: username,
-                message: result.data.createMessage
-            });
+            const data = result.data.createMessage;
+            console.log(data);
+            if (data.conversation) {
+                socket.emit("send-conv", {
+                    recipient: recipientId,
+                    conversation: data.conversation,
+                    users: data.users
+                });
+            } else {
+                socket.emit("send-message", {
+                    recipient: recipientId,
+                    conversationId: id,
+                    message: data.message
+                });
+            }
             //sendMessage(id, recipientId, result.data.createMessage);
         },
         onError(err) {

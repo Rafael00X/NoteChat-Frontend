@@ -162,7 +162,7 @@ const CREATE_CONVERSATION = gql`
         }
     }
 `;
-
+/*
 const CREATE_MESSAGE = gql`
     mutation CreateMessage($conversationId: ID, $recipientId: ID!, $body: String!) {
         createMessage(conversationId: $conversationId, recipientId: $recipientId, body: $body) {
@@ -170,6 +170,34 @@ const CREATE_MESSAGE = gql`
             userId
             body
             createdAt
+        }
+    }
+`;
+*/
+const CREATE_MESSAGE = gql`
+    mutation CreateMessage($conversationId: ID, $recipientId: ID!, $body: String!) {
+        createMessage(conversationId: $conversationId, recipientId: $recipientId, body: $body) {
+            message {
+                id
+                userId
+                body
+                createdAt
+            }
+            conversation {
+                id
+                userIds
+                messages {
+                    id
+                    userId
+                    body
+                    createdAt
+                }
+                createdAt
+            }
+            users {
+                userId
+                username
+            }
         }
     }
 `;
@@ -204,6 +232,42 @@ const GET_CONVERSATIONS = gql`
     }
 `;
 
+const GET_USER = gql`
+    query GetUser {
+        getUser {
+            id
+            username
+            email
+            password
+            createdAt
+            posts
+            conversations
+        }
+    }
+`;
+
+const FETCH_CONVERSATIONS = gql`
+    query FetchConversations($conversationIds: [ID!]) {
+        fetchConversations(conversationIds: $conversationIds) {
+            conversation {
+                id
+                userIds
+                messages {
+                    id
+                    userId
+                    body
+                    createdAt
+                }
+                createdAt
+            }
+            profile {
+                userId
+                username
+            }
+        }
+    }
+`;
+
 export {
     GET_POSTS,
     CREATE_POST,
@@ -218,5 +282,7 @@ export {
     CREATE_MESSAGE,
     DELETE_MESSAGE,
     GET_PROFILE,
-    GET_CONVERSATIONS
+    GET_CONVERSATIONS,
+    GET_USER,
+    FETCH_CONVERSATIONS
 };

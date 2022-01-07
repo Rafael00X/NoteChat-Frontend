@@ -5,23 +5,18 @@ import FindUser from "./FindUser";
 import FindConversation from "./FindConversation";
 import ProfileCard from "./ProfileCard";
 import ConversationCard from "./ConversationCard";
+import { useConversationContext } from "../../context/ConversationContext";
+import { useEffect } from "react";
 
 function Contacts(props) {
-    const { allConversations, userId, callbackGetRecipient } = props;
+    const { userId, callbackGetRecipient } = props;
     const [active, setActive] = useState(1);
-    const [user, setUser] = useState();
     return (
         <div id="contacts">
             <ContactsHeader />
             <ButtonContainer useButton={[active, setActive]} />
 
-            {active === 1 && (
-                <Component1
-                    allConversations={allConversations}
-                    userId={userId}
-                    callbackGetRecipient={callbackGetRecipient}
-                />
-            )}
+            {active === 1 && <Component1 callbackGetRecipient={callbackGetRecipient} />}
             {active === 2 && (
                 <Component2 userId={userId} callbackGetRecipient={callbackGetRecipient} />
             )}
@@ -54,7 +49,7 @@ function ButtonContainer(props) {
         </div>
     );
 }
-
+/*
 function Component1(props) {
     const { allConversations, userId, callbackGetRecipient } = props;
     const [conversations, setConversations] = useState(allConversations);
@@ -76,6 +71,44 @@ function Component1(props) {
                         key={conv.conversationId}
                         id={conv.conversationId}
                         userId={userId}
+                        callback={callbackGetRecipient}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+*/
+function Component1(props) {
+    const { callbackGetRecipient } = props;
+    const conversationContext = useConversationContext();
+    const [conversations, setConversations] = useState([]);
+
+    const allConversations = conversationContext.conversations;
+
+    useEffect(() => {
+        setConversations(allConversations);
+    }, [allConversations]);
+
+    const [searchMode, setSearchMode] = useState(false);
+    const convs = searchMode ? conversations : allConversations;
+
+    return (
+        <div className="component1">
+            <div className="searchbar">
+                <FindConversation
+                    setConversations={setConversations}
+                    useSearchMode={[searchMode, setSearchMode]}
+                    allConvs={allConversations}
+                />
+            </div>
+            <div className="conversation-list">
+                {convs.map((conv) => (
+                    <ConversationCard
+                        key={conv.conversation.id}
+                        id={conv.conversation.id}
+                        conversation={conv}
+                        searchMode={searchMode}
                         callback={callbackGetRecipient}
                     />
                 ))}

@@ -5,9 +5,10 @@ import { MdClose } from "react-icons/md";
 
 import MessageForm from "./MessageForm";
 import { GET_CONVERSATION, GET_PROFILE } from "../../util/graphql";
+import { useConversationContext } from "../../context/ConversationContext";
 
 function Inbox(props) {
-    console.log(props.details);
+    // console.log(props.details);
     const {
         userId,
         username,
@@ -23,7 +24,11 @@ function Inbox(props) {
     return (
         <div id="inbox">
             <InboxHeader profileData={profileData} handleClose={() => setDetails(null)} />
-            <MessageContainer conversationData={conversationData} userId={userId} />
+            <MessageContainer
+                conversationData={conversationData}
+                conversationId={conversationId}
+                userId={userId}
+            />
             <MessageForm
                 id={conversationId}
                 userId={userId}
@@ -64,6 +69,7 @@ function InboxHeader(props) {
 }
 
 function MessageContainer(props) {
+    /*
     const {
         conversationData: { data },
         userId
@@ -73,6 +79,27 @@ function MessageContainer(props) {
         <div className="message-container">
             {data &&
                 data.getConversation.messages.map((message) => {
+                    const alignment = userId === message.userId ? "right" : "left";
+                    return (
+                        <div key={message.id} style={{ textAlign: alignment }}>
+                            <div className={"message " + alignment}>
+                                <p className="message-body">{message.body}</p>
+                                <p className="message-time">{message.createdAt}</p>
+                            </div>
+                        </div>
+                    );
+                })}
+        </div>
+    );
+    */
+    const { conversationId, userId } = props;
+    const conversationContext = useConversationContext();
+    const c = conversationContext.conversations.find((c) => c.conversation.id === conversationId);
+    const data = c ? c.conversation : null;
+    return (
+        <div className="message-container">
+            {data &&
+                data.messages.map((message) => {
                     const alignment = userId === message.userId ? "right" : "left";
                     return (
                         <div key={message.id} style={{ textAlign: alignment }}>
