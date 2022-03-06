@@ -30,6 +30,7 @@ function Register(props) {
         onError(err) {
             console.log(err);
             console.log(err.graphQLErrors[0].extensions.error);
+            setErrors(err.graphQLErrors[0].extensions.error);
             //console.log(err.graphQLErrors[0].extensions);
         },
         variables: values

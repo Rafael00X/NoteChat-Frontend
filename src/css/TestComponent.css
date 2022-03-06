@@ -1,31 +1,102 @@
-.wrapper {
-    max-width: 100%;
-    padding: 0 1.5em;
-    background: white;
-    border: 1px solid lightgray;
-    border-radius: 1.5em;
-    overflow: hidden;
+/* https://www.youtube.com/watch?v=NuYMMNK4wzA */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400&display=swap");
+
+.profile-view-card {
+    --highlight-color: rgb(35, 182, 219);
 }
-.wrapper:hover,
-.wrapper.focus {
-    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-}
-.search {
+
+.profile-view-card {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    padding: 30px;
     display: flex;
-    height: 3em;
+    flex-direction: column;
     align-items: center;
+    width: 500px;
+    margin: auto;
+    background-color: white;
 }
-.search input {
-    flex: 1;
-    width: 100%;
-    border: 0;
+
+.profile-view-card .text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
-.search button {
-    margin: 0;
-    padding: 0;
-    border: 0;
+
+.profile-view-card .text img {
+    height: 170px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-view-card .text h3 {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.profile-view-card .uid span {
+    color: var(--highlight-color);
+    font-size: 15px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+
+.profile-view-card .uid button {
+    border: none;
     background-color: transparent;
+    color: var(--highlight-color);
+    width: 25px;
+    height: 30px;
+    border-radius: 2px;
 }
-:focus {
-    outline: none;
+
+.profile-view-card .uid button:hover {
+    background-color: var(--highlight-color);
+    color: white;
+}
+
+.profile-view-card .text textarea {
+    width: 400px;
+    height: 200px;
+    text-align: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 20px;
+    padding: 5px;
+    border: none;
+}
+
+.profile-view-card .btns {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profile-view-card .btns button {
+    border: none;
+    background-color: var(--highlight-color);
+    color: white;
+    width: auto;
+    padding: 5px 15px;
+    margin: 0 10px;
+}
+
+.profile-view-card .links {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.profile-view-card .links i {
+    color: rgb(35, 182, 219);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.profile-view-card .links i:hover {
+    color: rgb(29, 157, 189);
+}
+
+.profile-view-card .uid {
+    display: inline;
 }

@@ -1,0 +1,129 @@
+#note-section {
+  max-width: 800px;
+  /* --------------------------- Note Form --------------------------- */
+  /* --------------------------- Note Card --------------------------- */
+  /* --------------------------- Note Comments --------------------------- */
+  /* --------------------------- Comment --------------------------- */
+  /* --------------------------- Like Button --------------------------- */
+  /* --------------------------- Comment Button --------------------------- */
+}
+
+#note-section .note-form {
+  background-color: #ffffff;
+  border-radius: 2px;
+  margin-top: 30px;
+  padding: 10px;
+}
+
+#note-section .note-form textarea {
+  border: none;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+#note-section .note-card {
+  margin: 2rem 0;
+}
+
+#note-section .note-avatar {
+  display: inline-block;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  margin-bottom: 30px;
+}
+
+#note-section .note-header {
+  display: inline-block;
+  margin-top: 0px;
+  text-decoration: none !important;
+}
+
+#note-section .note-header h5 {
+  display: inline;
+}
+
+#note-section .note-header p {
+  font-size: 0.8rem;
+}
+
+#note-section .note-modify-buttons {
+  display: inline;
+  float: right;
+}
+
+#note-section .note-buttons button {
+  width: 140px;
+  margin-right: 10px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
+}
+
+#note-section .note-comments {
+  border-top: 1px solid gray;
+}
+
+#note-section .comment-textarea {
+  width: calc(100% - 65px);
+  display: inline-block;
+}
+
+#note-section .comment-send-btn {
+  float: right;
+  margin: auto;
+}
+
+#note-section .comment {
+  padding: 10px 0;
+}
+
+#note-section .comment-avatar {
+  float: left;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+#note-section .comment-body {
+  background-color: #eee;
+  border-radius: 10px;
+  display: inline-block;
+  width: calc(100% - 100px);
+  padding: 0 10px;
+}
+
+#note-section .comment-body p {
+  word-break: break-word;
+  word-wrap: break-word;
+}
+
+#note-section .comment-modify-buttons {
+  float: right;
+  padding: 0 10px;
+}
+
+#note-section .like-btn {
+  background-color: #fff;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+#note-section .like-btn.filled {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+#note-section .comment-btn {
+  background-color: #fff;
+  border-color: #5aaaff;
+  color: #5aaaff;
+}
+
+#note-section .comment-btn.filled {
+  background-color: #5aaaff;
+  color: #fff;
+}
+/*# sourceMappingURL=note-section.css.map */

@@ -5,6 +5,7 @@ import { MdClose } from "react-icons/md";
 import MessageForm from "./MessageForm";
 import { useConversationContext } from "../../context/ConversationContext";
 import { useUserContext } from "../../context/UserContext";
+import { getDate, getHourAndMinute } from "../../util/momentFormats";
 
 function Inbox(props) {
     const {
@@ -58,7 +59,12 @@ function MessageContainer(props) {
                         <div key={message.id} style={{ textAlign: alignment }}>
                             <div className={"message " + alignment}>
                                 <p className="message-body">{message.body}</p>
-                                <p className="message-time">{message.createdAt}</p>
+                                <p className="message-time">
+                                    {"At " +
+                                        getHourAndMinute(message.createdAt) +
+                                        " on " +
+                                        getDate(message.createdAt)}
+                                </p>
                             </div>
                         </div>
                     );

@@ -47,7 +47,7 @@ function ButtonContainer(props) {
                 onClick={() => setActive(2)}
                 style={{ backgroundColor: active === 2 ? "whitesmoke" : "grey" }}>
                 <RiUserAddFill />
-                &nbsp;&nbsp;New Contact
+                &nbsp;&nbsp;Add Contact
             </button>
         </div>
     );
@@ -64,7 +64,7 @@ function Component1(props) {
 
     useEffect(() => {
         if (!searchMode) setConversations(allConversations);
-    }, [allConversations]);
+    }, [allConversations, searchMode]);
 
     return (
         <div className="component1">

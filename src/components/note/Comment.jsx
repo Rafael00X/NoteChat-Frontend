@@ -4,6 +4,7 @@ import Avatar from "react-avatar";
 
 import { AuthContext } from "../../context/authorization";
 import ConfirmDialog from "../ConfirmDialog";
+import { getDate, getHourAndMinute } from "../../util/momentFormats";
 
 function Comment(props) {
     const { comment, callback } = props;
@@ -35,7 +36,11 @@ function Comment(props) {
                     <span>
                         <strong>{comment.username}</strong>
                     </span>
-                    <p>{comment.createdAt}</p>
+                    <p style={{ fontSize: "13px" }}>
+                        <i>Commented at </i>
+                        {getHourAndMinute(comment.createdAt)}
+                        <i> on </i> {getDate(comment.createdAt)}
+                    </p>
                     <p>{comment.body}</p>
                 </div>
 

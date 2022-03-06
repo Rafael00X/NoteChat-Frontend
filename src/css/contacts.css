@@ -8,8 +8,8 @@
 #contacts {
     display: inline-block;
     margin-left: 0;
-    width: 450px;
     height: 100%;
+    width: 450px;
     overflow-y: hidden;
     border-right: 1px solid var(--border-color);
 }

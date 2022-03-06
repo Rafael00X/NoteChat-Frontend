@@ -21,9 +21,11 @@ body {
     display: flex;
 }
 
+/*
 #dashboard {
     max-width: 1000px;
 }
+*/
 
 .light-glass {
     background-color: rgba(255, 255, 255, 0.3) !important;
@@ -68,3 +70,4 @@ button.transparent {
 @import "./css/search-bar.css";
 @import "./css/inbox.css";
 @import "./css/contacts.css";
+@import "./css/responsive.css";

@@ -8,6 +8,7 @@ function ChatSection() {
     const [inboxDetails, setInboxDetails] = useState(null);
     const userContext = useUserContext();
     console.log(inboxDetails);
+    console.log(window.innerWidth);
 
     function callbackGetRecipient(recipientId, recipientName) {
         if (recipientId == null) {
@@ -23,7 +24,7 @@ function ChatSection() {
 
     return (
         <div id="chat-section">
-            <div className="contact-list">
+            <div className={"contact-list" + (inboxDetails ? " hide" : "")}>
                 <Contacts userId={userContext.id} callbackGetRecipient={callbackGetRecipient} />
             </div>
             {inboxDetails && <Inbox details={inboxDetails} setDetails={setInboxDetails} />}
