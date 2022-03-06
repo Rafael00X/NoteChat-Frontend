@@ -6,7 +6,7 @@ import { GET_PROFILE } from "../../util/graphql";
 import Avatar from "react-avatar";
 
 function ProfileCard(props) {
-    const { userId, callback, closeCallback } = props;
+    const { userId, callback } = props;
     const { data, loading } = useQuery(GET_PROFILE, { variables: { userId } });
 
     function handleMessage() {
@@ -41,28 +41,12 @@ function ProfileCard(props) {
         </div>
     );
 }
-/*
-function Avatar(props) {
-    return (
-        <div className="avatar">
-            <img src={props.image} alt="user avatar" />
-        </div>
-    );
-}
-*/
+
 function NameHolder(props) {
     return (
         <div className="nameHolder">
             <h1>{props.name}</h1>
             <h2>{"ID: " + props.id}</h2>
-        </div>
-    );
-}
-
-function Info(props) {
-    return (
-        <div className="info">
-            <p>{props.bio}</p>
         </div>
     );
 }
