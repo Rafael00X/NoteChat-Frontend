@@ -14,14 +14,6 @@ function ProfileCard(props) {
         callback(userId, data.getProfile.username);
     }
 
-    function handleCopy() {
-        // TODO - Copy 'userId' to clipboard
-    }
-
-    function handleClose() {
-        closeCallback();
-    }
-
     if (loading) return null;
 
     if (!data)
@@ -45,11 +37,7 @@ function ProfileCard(props) {
                 <NameHolder name={data.getProfile.username} id={data.getProfile.userId} />
             </div>
 
-            <ButtonHolder
-                handleMessage={handleMessage}
-                handleCopy={handleCopy}
-                handleClose={handleClose}
-            />
+            <ButtonHolder handleMessage={handleMessage} />
         </div>
     );
 }
@@ -82,9 +70,9 @@ function Info(props) {
 function ButtonHolder(props) {
     return (
         <div className="buttonHolder">
-            <Button onClick={props.handleMessage}>Message</Button>
-            <Button onClick={props.handleCopy}>Copy ID</Button>
-            <Button onClick={props.handleClose}>Close</Button>
+            <Button onClick={props.handleMessage} style={{ width: "100%" }}>
+                Message
+            </Button>
         </div>
     );
 }

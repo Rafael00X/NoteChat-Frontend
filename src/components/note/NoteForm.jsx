@@ -48,7 +48,7 @@ function NoteForm() {
             <Form onSubmit={onSubmit}>
                 <Form.Control
                     as="textarea"
-                    rows={1}
+                    rows={text === "" ? 1 : 8}
                     id="new-note-body"
                     placeholder="Add a note..."
                     name="body"

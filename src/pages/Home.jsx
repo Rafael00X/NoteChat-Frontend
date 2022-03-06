@@ -69,7 +69,7 @@ function LandingPage() {
                     <Navbar.Brand>
                         <img
                             alt=""
-                            src="/logo.svg"
+                            src="https://img.icons8.com/color/48/000000/communication.png"
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
