@@ -6,4 +6,4 @@ NoteChat is a lightweight social media application that lets you connect with yo
 
 Chat with your friends
 
-![p2](https://user-images.githubusercontent.com/79894157/203585830-eb67319d-bc3a-4c33-a885-3f9357443d6f.PNG)
+![p3](https://user-images.githubusercontent.com/79894157/203701960-1400a5da-18c5-487b-9df4-2c231bcd96a3.PNG)
