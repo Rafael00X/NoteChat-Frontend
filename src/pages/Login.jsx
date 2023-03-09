@@ -59,7 +59,7 @@ function Login(props) {
                 <Button type="submit">Login</Button>
             </Form>
             <a href="/register">Not a user? Register</a>
-            {Object.keys(errors).length > 0 && (
+            {errors && Object.keys(errors).length > 0 && (
                 <div className="ui error message">
                     <ul className="list">
                         {Object.values(errors).map((error, index) => (

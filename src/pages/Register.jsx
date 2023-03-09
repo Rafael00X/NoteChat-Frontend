@@ -83,7 +83,7 @@ function Register(props) {
                 <Button type="submit">Register</Button>
             </Form>
             <a href="/login">Already a user? Login</a>
-            {Object.keys(errors).length > 0 && (
+            {errors && Object.keys(errors).length > 0 && (
                 <div className="ui error message">
                     <ul className="list">
                         {Object.values(errors).map((error, index) => (

@@ -3,8 +3,9 @@ import io from "socket.io-client";
 
 import { useConversationContext } from "./ConversationContext";
 import { useUserContext } from "./UserContext";
+import { socketServerUrl } from "../config";
 
-const URL = "https://fathomless-refuge-93943.herokuapp.com/";
+const URL = socketServerUrl;
 
 const SocketContext = createContext();
 function useSocketContext() {
