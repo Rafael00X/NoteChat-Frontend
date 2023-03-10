@@ -30,9 +30,9 @@ NoteChat is a lightweight social media application that lets you connect with yo
 
 The following are the tools and dependencies needed to locally run this project:
 
-* [Node.js](`https://nodejs.org/en/`)
-* [Git](`https://git-scm.com/downloads/`)
-* [MongoDB Database](`https://www.mongodb.com/`)
+* [Node.js](https://nodejs.org/en/)
+* [Git](https://git-scm.com/downloads/)
+* [MongoDB Database](https://www.mongodb.com/)
 
 ## Installation Guide
 
