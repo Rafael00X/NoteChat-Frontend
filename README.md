@@ -3,10 +3,8 @@
 
 NoteChat is a lightweight social media application that lets you connect with your peers, share your stories and chat with them.
 
-![p3](https://user-images.githubusercontent.com/79894157/203585810-e4195e56-7547-4ae0-9375-8cd14c09082d.PNG)
-
-![p3](https://user-images.githubusercontent.com/79894157/203701960-1400a5da-18c5-487b-9df4-2c231bcd96a3.PNG)
-
+## Watch this video demo here
+[![Watch this demo here](https://img.youtube.com/vi/NG4l4wApM7w/0.jpg)](https://www.youtube.com/watch?v=NG4l4wApM7w)
 
 ## Table of content
 
